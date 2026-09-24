@@ -1,0 +1,629 @@
+---
+title: Demo Report
+subtitle: Demo report
+description: "This document showcases some of the in-built capabilities of quarto. It also shows the custom theme, style and usage."
+code-tools: true
+date: today
+date-format: "DD MMM YYYY"
+
+filters:
+  - assets/custom.lua
+  - fontawesome
+
+format:
+  folium-typst:
+    keep-typ: true
+    toc: true
+    toc-depth: 3
+    number-sections: true
+    section-numbering: 1.1.1
+    columns: 2
+    mainfont: "Nunito"
+    font-paths: fonts
+    papersize: "a4"
+    margin-left: 2.15cm
+    margin-right: 2.15cm
+    margin-top: 3cm
+    margin-bottom: 3cm
+
+bibliography:
+  - references.bib
+
+folium:
+  id: "NBIS SUPPORT 0000"
+  class: "TECHNICAL REPORT"
+  logo: 
+     path: assets/nbis-scilifelab.svg
+  logo-height: 0.8cm
+  font-size: 12pt
+  background: 
+     path: assets/bg.png
+  investigator: 
+    - name: "John Doe"
+      email: "john.doe@email.com"
+      org: "Some university"
+    - name: "Jane Doe"
+      email: "jane.doe@email.com"
+      org: "Another university"
+    - name: "Jane Doe"
+      email: "jane.doe@email.com"
+      org: "Another university"
+  pi:
+    - name: "John Doe"
+      email: "john.doe@email.com"
+      org: "Some university"
+    - name: "Jane Doe"
+      email: "jane.doe@email.com"
+      org: "Another university"
+  analyst:
+    - name: "John Doe"
+      email: "john.doe@email.com"
+      org: "Some university"
+    - name: "Jane Doe"
+      email: "jane.doe@email.com"
+      org: "Another university"
+---
+
+`#outline()`{=typst}
+
+`#pagebreak()`{=typst}
+
+## Introduction
+
+This is a [quarto](https://quarto.org/) document that is rendered through typst into a PDF document. Working with Typst in Quarto is covered [here](https://quarto.org/docs/output-formats/typst.html). You can mostly use markdown syntax to author your document. This demo document showcases some of the common formatting options available in markdown along with some typst specific features. For some features and more control, typst code is used.
+
+The outline at the beginning of the document is generated using the typst function `` `#outline()`{=typst} ``. A page break is added using `` `#pagebreak()`{=typst} ``.
+
+## Text formatting
+
+### Headings
+
+```
+## Level 2 heading  
+### Level 3 heading  
+#### Level 4 heading  
+##### Level 5 heading  
+###### Level 6 heading
+```
+
+### Character styles
+
+|Markdown|Rendered|
+|---|---|
+|`__Bold text__`|__Bold text__|
+|`_Italic text_`|_Italic text_|
+|`~~Strikethrough~~`|~~Strikethrough~~|
+|`H~2~O`|H~2~O|
+|`x^2^`|x^2^|
+|`--`|--|
+|`---`|---|
+|`[link](r-project.org)`|[link](r-project.org)|
+
+Here is how to add formatting using typst functions:
+
+|Typst|Rendered|
+|---|---|
+|`` `#underline[text]`{=typst} ``|`#underline[text]`{=typst}|
+|`` `#highlight[text]`{=typst} ``|`#highlight[text]`{=typst}|
+|`` `H#sub[2]O`{=typst} ``|`H#sub[2]O`{=typst}|
+|`` `x#super[2]`{=typst} ``|`x#super[2]`{=typst}|
+|`` `#badge([badge])`{=typst} ``|`#badge([badge])`{=typst}|
+|`` `#badge-primary([badge])`{=typst} ``|`#badge-primary([badge])`{=typst}|
+|`` `#badge-secondary([badge])`{=typst} ``|`#badge-secondary([badge])`{=typst}|
+|`` `#badge-tertiary([badge])`{=typst} ``|`#badge-tertiary([badge])`{=typst}|
+
+Here is a rectangle `` `#rect(width: 1cm)`{=typst} ``  
+
+`#rect(width: 1cm)`{=typst}
+
+Let's generate some random text `` `#lorem(10)`{=typst} ``
+
+`#lorem(10)`{=typst}
+
+This text has a citation @example2024. The bibliography is listed at the end of the document.
+
+### Blockquote
+
+```         
+> This is a block quote. This
+> paragraph has two lines.
+>
+> 1. This is a list inside a block quote.
+> 2. Second item.
+```
+
+> This is a block quote. This paragraph has two lines.
+>
+> 1.  This is a list inside a block quote.
+> 2.  Second item.
+
+### Line block
+
+Line block preserves spaces and new lines.
+
+```
+| This
+|     block
+|          preserves
+|                   formatting
+```
+
+| This
+|     block
+|          preserves
+|                   formatting
+
+### Rule
+
+A horizontal line can be created using three or more `*` or `-`.
+
+`***`
+
+------------------------------------------------------------------------
+
+### Footnote
+
+An example of footnote reference [^1]
+
+[^1]: That reference refers to this footnote.
+
+## Code formatting
+
+Verbatim code is text formatted using monospaced font intended as code. Verbatim code can be defined inline where `` `date()` `` looks like `date()`.
+
+Code can also be defined inside code blocks.
+
+````
+```
+date()
+```
+````
+
+```
+date()
+```
+
+Source code, ie; code that is highlighted or executed in a quarto document is not covered here.
+
+## Lists
+
+### Unordered
+
+Unordered lists are created using dashes.
+
+::: {.grid}
+::: {.g-col-6}
+
+```
+- Bullet 1
+- Bullet 2
+  - Sub-bullet 2.1
+  - Sub-bullet 2.2
+- Bullet 3
+```
+
+:::
+::: {.g-col-6}
+
+- Bullet 1
+- Bullet 2
+  - Sub-bullet 2.1
+  - Sub-bullet 2.2
+- Bullet 3
+
+:::
+:::
+
+### Ordered
+
+Ordered lists are created using numbers.
+
+::: {.grid}
+::: {.g-col-6}
+
+```
+1. Point 1
+2. Point 2
+3. Point 3
+```
+
+:::
+::: {.g-col-6}
+
+1. Point 1
+2. Point 2
+3. Point 3
+
+:::
+:::
+
+### Multiple Lists
+
+::: {.grid}
+::: {.g-col-6}
+
+```
+::: {}
+1. Point 1
+2. Point 2
+:::
+
+:::{}
+1. Point 1
+2. Point 2
+:::
+```
+
+:::
+::: {.g-col-6}
+
+::: {}
+1. Point 1
+2. Point 2
+:::
+
+:::{}
+1. Point 1
+2. Point 2
+:::
+
+:::
+:::
+
+## Images
+
+Images can be inserted using plain markdown or HTML directly. Plain markdown can be embellished with custom quarto adjustments to modify aspects of the image. Clicking the image opens the image in a lightbox.
+
+### Using Markdown
+
+Using regular markdown.
+
+```         
+![](assets/typst.png)
+```
+
+![](assets/typst.png)
+
+The dimensions are based on image and/or fill up the entire available space. You can control the dimension as shown below.
+
+```         
+![This is a caption](assets/typst.png){width=30%}  
+```
+
+![This is a caption](assets/typst.png){width="30%"}
+
+This image above is now 30% of it's original width.
+
+#### Figure layout
+
+```         
+::: {#fig-mylabel layout-ncol=2}
+![Caption for figure 1](assets/typst.png){width="40%"}
+
+![Caption for figure 2](assets/typst.png){width="40%"}
+
+These figures are interesting.
+:::
+```
+
+::: {#fig-mylabel layout-ncol="2"}
+![Caption for figure 1](assets/typst.png){width="40%"}
+
+![Caption for figure 2](assets/typst.png){width="40%"}
+
+These figures are interesting.
+:::
+
+More figure options and layouts are described [here](https://quarto.org/docs/authoring/figures.html). Cross referencing described [here](https://quarto.org/docs/authoring/cross-references.html).
+
+### Using Typst
+
+````
+```{=typst} 
+#image("assets/typst.png", width: 30%)
+```
+````
+
+```{=typst} 
+#image("assets/typst.png", width: 30%)
+```
+
+````
+```{=typst} 
+#figure(
+  image("assets/typst.png", width: 30%),
+  caption: [This is the typst logo.]
+)
+```
+````
+
+```{=typst} 
+#figure(
+  image("assets/typst.png", width: 30%),
+  caption: [This is the typst logo.]
+)
+```
+
+For more information on figures, see [here](https://quarto.org/docs/authoring/figures.html). Images generated through code is not covered here.
+
+## Math expressions
+
+Some examples of rendering equations.
+
+```         
+$e^{i\pi} + 1 = 0$
+```
+
+$e^{i\pi} + 1 = 0$
+
+```         
+$$\frac{E \times X^2 \prod I}{2+7} = 432$$
+```
+
+$$\frac{E \times X^2 \prod I}{2+7} = 432$$
+
+```         
+$$\sum_{i=1}^n X_i$$
+```
+
+$$\sum_{i=1}^n X_i$$
+
+```         
+$$\int_0^{2\pi} \sin x~dx$$
+```
+
+$$\int_0^{2\pi} \sin x~dx$$
+
+```         
+$\left( \sum_{i=1}^{n}{i} \right)^2 = \left( \frac{n(n-1)}{2}\right)^2 = \frac{n^2(n-1)^2}{4}$
+```
+
+$\left( \sum_{i=1}^{n}{i} \right)^2 = \left( \frac{n(n-1)}{2}\right)^2 = \frac{n^2(n-1)^2}{4}$
+
+```         
+$\begin{eqnarray} X & \sim & \mathrm{N}(0,1)\\ Y & \sim & \chi^2_{n-p}\\ R & \equiv & X/Y \sim t_{n-p} \end{eqnarray}$
+```
+
+$\begin{eqnarray} X & \sim & \mathrm{N}(0,1)\\ Y & \sim & \chi^2_{n-p}\\ R & \equiv & X/Y \sim t_{n-p} \end{eqnarray}$
+
+```         
+$\begin{eqnarray} P(|X-\mu| > k) & = & P(|X-\mu|^2 > k^2)\\ & \leq & \frac{\mathbb{E}\left[|X-\mu|^2\right]}{k^2}\\ & \leq & \frac{\mathrm{Var}[X]}{k^2} \end{eqnarray}$
+```
+
+$\begin{eqnarray} P(|X-\mu| > k) & = & P(|X-\mu|^2 > k^2)\\ & \leq & \frac{\mathbb{E}\left[|X-\mu|^2\right]}{k^2}\\ & \leq & \frac{\mathrm{Var}[X]}{k^2} \end{eqnarray}$
+
+## Tables
+
+
+For simple cases, tables can be manually created in markdown.
+
+```         
+|speed|dist|
+|-----|----|
+|4    |   2|
+|4    |  10|
+|7    |   4|
+```
+
+| speed | dist |
+|-------|------|
+| 4     | 2    |
+| 4     | 10   |
+| 7     | 4    |
+
+Table caption and numbering can be added as such:
+
+```         
+|speed|dist|
+|-----|----|
+|4    |   2|
+|4    |  10|
+|7    |   4|
+
+: These are exciting results. {#tbl-mylabel}
+```
+
+| speed | dist |
+|-------|------|
+| 4     | 2    |
+| 4     | 10   |
+| 7     | 4    |
+
+: These are exciting results. {#tbl-mylabel}
+
+Tables can also be generated through code which is not covered here.
+
+More information about [tables](https://quarto.org/docs/authoring/tables.html).
+
+## Icons
+
+### Fontawesome
+
+To use [fontawesome](https://fontawesome.com/search?m=free) icons as shortcodes, quarto extension [fontawesome](https://github.com/quarto-ext/fontawesome) needs to be installed.
+
+Icons can be placed using shortcodes.
+
+`{{{< fa lightbulb >}}}`      {{< fa lightbulb >}}     
+`{{{< fa exclamation >}}}`    {{< fa exclamation >}}   
+`{{{< fa clipboard-list >}}}` {{< fa clipboard-list >}}  
+`{{{< fa comments >}}}`       {{< fa comments >}}      
+`{{{< fa desktop >}}}`        {{< fa desktop >}}       
+`{{{< fa cloud >}}}`          {{< fa cloud >}}         
+`{{{< fa check >}}}`          {{< fa check >}}         
+`{{{< fa times >}}}`          {{< fa times >}}         
+`{{{< fa skull >}}}`          {{< fa skull >}}         
+`{{{< fa skull size=2x >}}}`  {{< fa skull size=2x >}}   
+`{{{< fa brands github >}}}`  {{< fa brands github >}}
+
+### FontAwesome icons
+
+[FontAwesome icons](https://fontawesome.com/search?ip=classic&ic=free-collection) are made available in this template. FA6 and FA7 are supported. For more details on the Typst package that enables this, see [here](https://typst.app/universe/package/fontawesome/).
+
+|Typst|Rendered|
+|---|:---:|
+|`` `#fa-icon("lightbulb")`{=typst} ``|`#fa-icon("lightbulb")`{=typst}|
+|`` `#fa-icon("lightbulb", solid:true)`{=typst} ``|`#fa-icon("lightbulb", solid:true)`{=typst}|
+|`` `#fa-icon("laptop")`{=typst} ``|`#fa-icon("laptop")`{=typst}|
+|`` `#fa-icon("cloud")`{=typst} ``|`#fa-icon("cloud")`{=typst}|
+|`` `#fa-icon("github")`{=typst} ``|`#fa-icon("github")`{=typst}|
+|`` `#fa-icon("exclamation-circle", size:15pt)`{=typst} ``|`#fa-icon("exclamation-circle", size:15pt)`{=typst}|
+
+## Call-Outs
+
+Call-Out blocks are explained [here](https://quarto.org/docs/authoring/callouts.html).
+
+```         
+::: {.callout-note}
+This is a call-out.
+:::
+
+::: {.callout-warning}
+This is a call-out.
+:::
+
+::: {.callout-important}
+This is a call-out.
+:::
+
+::: {.callout-tip}
+This is a call-out.
+:::
+
+::: {.callout-caution}
+This is a call-out.
+:::
+```
+
+::: callout-note
+This is a call-out.
+:::
+
+::: callout-warning
+This is a call-out.
+:::
+
+::: callout-important
+This is a call-out.
+:::
+
+::: callout-tip
+This is a call-out.
+:::
+
+::: callout-caution
+This is a call-out.
+:::
+
+## Layout
+
+### Span
+
+`[Content inside span]{style="background-color: gray"}`
+
+[Content inside span]{style="background-color: gray"}
+
+### Div
+
+```
+::: {style="background-color: gray"}
+Content inside div
+:::
+```
+
+::: {style="background-color: gray"}
+Content inside div
+:::
+
+Divs can be nested like this:
+
+```
+:::: {.class}
+::: {.class}
+:::
+::::
+```
+
+Both spans and divs support attributes in this specific order: identifiers, classes, and then key-value attributes. 
+
+`[Content inside span]{#id .class key1="val1" key2="val2"}`
+
+### Hidden div
+
+```
+::: {.hidden}
+Hidden content
+:::
+```
+
+### Conditional content
+
+````
+::: {{.content-visible when-format="html"}}
+Will only appear in HTML.
+:::
+````
+
+````
+::: {{.content-hidden when-format="html"}}
+Will not appear in HTML.
+:::
+````
+
+Conditional content is documented [here](https://quarto.org/docs/authoring/conditional.html).
+
+## Shortcodes
+
+Shortcodes are sort of like quarto functions. 
+
+Two important shortcodes are `meta` and `var`. `meta` allows to read metadata from the yaml block in the current page or from `_quarto.yml`. Here are a few examples:
+
+`{{{< meta title >}}}` {{< meta title >}}
+
+Similarly, `var` allows to read variables from `_variables.yml` if it has been defined. The `include` shortcode allows to add a child qmd document into a specific position in a qmd file.
+
+Some of the custom shortcodes added with this template are:
+
+`{{{< meta quarto_version >}}}` {{< meta quarto_version >}}  
+`{{{< meta current_date >}}}` {{< meta current_date >}}  
+`{{{< meta current year >}}}` {{< meta current_year >}}  
+`{{{< meta current time >}}}` {{< meta current_time >}}  
+
+Shortcodes are documented [here](https://quarto.org/docs/authoring/shortcodes.html).
+
+
+## Typst blocks
+
+````
+::: {.block fill="olive" inset="8pt" radius="4pt"}
+
+This is a block with olive background and rounded corners.
+
+:::
+````
+
+::: {.block fill="olive" inset="8pt" radius="4pt"}
+
+This is a block with olive background and rounded corners.
+
+:::
+
+## General tips
+
+-  Use level 2 heading as the highest level
+
+```
+## Section A
+```
+
+-  Add custom css under YAML if needed `css: "my-theme.css"`
+-  Check out the [Quarto](https://quarto.org/) website
+-  To add a bibliography, use the following:
+
+```
+::: {#refs}
+:::
+```
+
+::: {#refs}
+:::
+
