@@ -1,10 +1,12 @@
-# quarto-typst-folium
+# quarto-typst-folium <span><a href="https://github.com/royfrancis/quarto-typst-folium"><img src="assets/favicon.png" style="height:30px;vertical-align:middle;"></a></span>
 
-This is a Quarto extension that provides a Typst template for NBIS PDF reports.
+[![ci_badge](https://github.com/royfrancis/quarto-typst-folium/workflows/deploy/badge.svg)](https://github.com/royfrancis/quarto-typst-folium/actions?workflow=deploy)  
+
+This is a Quarto extension that provides a Typst template for NBIS PDF reports. This is part of the Folium collection. For project website template, see [folium](https://github.com/royfrancis/folium) and for a single-page folium project report, see [folium-webpage](https://github.com/royfrancis/folium-webpage).
 
 ## Features
 
-- Cover page with detailed author roles (investigator, PI, analyst)
+- Cover page with contributors grouped by role
 - Customizable logo and background images
 - Structured layout for NBIS reports
 - Support for FontAwesome icons
@@ -27,9 +29,9 @@ format:
 
 ## Configuration
 
-The template supports the standard Quarto `title`, `subtitle`, `description` and `date` fields. Skip the `author` field as persons are specified under the `folium` key.
+The template supports the standard Quarto `title`, `subtitle`, `description` and `date` fields. Skip the `author` field as persons are specified under `nbis.contributors`.
 
-Additional configuration is provided under the `folium` key:
+Additional configuration is provided under the `nbis` key:
 
 ```yaml
 title: "Title"
@@ -37,42 +39,49 @@ subtitle: "Subtitle"
 description: "Description"
 date: "20 DEC 2025"
 
-folium:
+nbis:
   id: "5426"                   # Support issue ID
-  class: "REPORT"              # e.g., REPORT, PROJECT PLAN 
+  class: "NBIS REPORT"              # e.g., REPORT, PROJECT PLAN 
   logo: 
      path: "path/to/logo.svg"    # Path to the logo image
+  logo-height: 0.8cm           # Must include a Typst length unit (cm, pt, etc.)
+  font-size: 12pt
   background: 
      path: "path/to/bg.png"      # Path to the background image
      
-  # Roles: investigator, pi, analyst
-  # Each can be a single person or a list of persons.
-  # Supports about 3-4 persons per role
-  investigator:                 # Researchers involved
+  contributors:
+    - name: "Person A"
+      email: "name@nbis.se"
+      affiliation: "NBIS"
+      roles: "NBIS Staff"
+    - name: "Person B"
+      email: "name@nbis.se"
+      affiliation: "NBIS"
+      roles: "NBIS Staff"
     - name: "Name"
-      email: "email@example.com"
-      org: "Organization"
-    
-  pi:                           # Principal Investigators
-    - name: "PI Name"
-      email: "pi@example.com"
-      org: "Organization"
-    
-  analyst:                      # NBIS Bioinformaticians
-    - name: "Analyst Name"
-      email: "analyst@example.com"
-      org: "Organization"
-    - name: "Analyst Name"
-      email: "analyst@example.com"
-      org: "Organization"
-    - name: "Analyst Name"
-      email: "analyst@example.com"
-      org: "Organization"
+      email: "name@email.com"
+      affiliation: "Some university"
+      roles: "User"
+    - name: "Name"
+      email: "name@email.com"
+      affiliation: "Some university"
+      roles: "Principal Investigator"
 ```
 
-## Example
+`name` is required. `email` is optional, while `affiliation` and `roles` each accept either a string or a list. Contributors without a role are grouped under `Contributor`. Role groups and people retain their order from the YAML.
 
-See `index.qmd` for a complete example.
+Standard Quarto format options such as `mainfont` are also supported:
+
+```yaml
+format:
+  folium-typst:
+    mainfont: "Lato"
+    font-paths: _extensions/folium/fonts  # path to custom fonts
+```
+
+## Documentation
+
+See project website [here](https://royfrancis.github.io/quarto-typst-folium) for examples and documentation.
 
 ## Acknowledgements
 

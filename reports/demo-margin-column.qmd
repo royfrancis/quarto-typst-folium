@@ -1,0 +1,43 @@
+---
+title: Margin column
+description: This document demonstrates the use of margin columns in Quarto.
+---
+
+::: {.callout-caution}
+Using these features result in the presence of a margin column and main column becomes narrower. This affects the whole document.
+:::
+
+## Aside
+
+`[This content lives in the right margin]{.aside}`
+
+[This content lives in the right margin]{.aside}
+
+
+## Margin table
+
+A table placed in the margin.
+
+```
+::: {.column-margin}
+
+| speed | dist |
+|-------|------|
+| 4     | 2    |
+| 4     | 10   |
+| 7     | 4    |
+
+:::
+```
+
+::: {.column-margin}
+
+| speed | dist |
+|-------|------|
+| 4     | 2    |
+| 4     | 10   |
+| 7     | 4    |
+
+:::
+
+

@@ -1,6 +1,6 @@
 #show: folium.with(
-  $if(folium.class)$
-    class: [$folium.class$],
+  $if(nbis.class)$
+    class: [$nbis.class$],
   $endif$
 
   $if(title)$
@@ -15,67 +15,64 @@
     description: [$description$],
   $endif$
 
-  $if(folium.id)$
-    id: [$folium.id$],
+  $if(nbis.id)$
+    id: [$nbis.id$],
   $endif$
 
   $if(date)$
     date: [$date$],
   $endif$
 
-  $if(folium.investigator)$
-    investigator: (
-      $for(folium.investigator)$
+  $if(nbis.contributors)$
+    contributors: (
+      $for(nbis.contributors)$
         (
+          $if(it.name)$
           name: [$it.name$],
+          $endif$
+          $if(it.email)$
           email: [$it.email$],
-          org: [$it.org$],
+          $endif$
+          $if(it.affiliation)$
+          affiliation: (
+            $for(it.affiliation)$
+              [$it$],
+            $endfor$
+          ),
+          $endif$
+          $if(it.roles)$
+          roles: (
+            $for(it.roles)$
+              [$it$],
+            $endfor$
+          ),
+          $endif$
         ),
       $endfor$
     ),
   $endif$
 
-  $if(folium.pi)$
-    pi: (
-      $for(folium.pi)$
-        (
-          name: [$it.name$],
-          email: [$it.email$],
-          org: [$it.org$],
-        ),
-      $endfor$
-    ),
-  $endif$
-
-  $if(folium.analyst)$
-    analyst: (
-      $for(folium.analyst)$
-        (
-          name: [$it.name$],
-          email: [$it.email$],
-          org: [$it.org$],
-        ),
-      $endfor$
-    ),
-  $endif$
-
-  $if(folium.background)$
+  $if(nbis.background)$
     background: (
-      path: "$folium.background.path$"
+      path: "$nbis.background.path$"
     ), 
   $endif$
 
-  $if(folium.logo)$
+  $if(nbis.logo)$
     logo: (
-      path: "$folium.logo.path$"
+      path: "$nbis.logo.path$"
     ), 
   $endif$
 
-  $if(folium.logo-height)$
-    logo-height: $folium.logo-height$,
+  $if(nbis.logo-height)$
+    logo-height: $nbis.logo-height$,
   $endif$
 
-  $if(folium.font-size)$
-    font-size: $folium.font-size$,
+  $if(nbis.font-size)$
+    font-size: $nbis.font-size$,
+  $endif$
+
+  $if(mainfont)$
+    mainfont: "$mainfont$",
   $endif$
 )

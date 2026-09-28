@@ -1,0 +1,112 @@
+---
+title: Usage
+subtitle: Folium Typst template guide
+description: "Set up and render NBIS reports with the Folium Typst template."
+format: html
+---
+
+## Start a project
+
+Create a project from the template:
+
+```bash
+quarto use template royfrancis/quarto-typst-folium
+```
+
+Use `report.qmd` as the starting point. `demo.qmd` contains examples of supported Quarto and Typst features.
+
+## Configure the report
+
+Set project-wide cover information in `_quarto.yml`:
+
+```yaml
+nbis:
+  id: "0000"
+  class: "NBIS REPORT"
+  logo:
+    path: assets/logos/nbis-scilifelab.svg
+  logo-height: 0.8cm
+  font-size: 12pt
+  background:
+    path: assets/images/bg.png
+  contributors:
+    - name: "Person A"
+      email: "name@nbis.se"
+      affiliation: "NBIS"
+      roles: "NBIS Staff"
+    - name: "Person B"
+      email: "name@example.com"
+      affiliation: "Some university"
+      roles: "Principal Investigator"
+```
+
+`name` is required. `email` is optional. `affiliation` and `roles` accept either a string or a list. Contributors without a role appear under **Contributor**.
+
+Configure PDF defaults under `format.folium-typst`:
+
+```yaml
+format:
+  folium-typst:
+    papersize: a4
+    columns: 1
+    mainfont: "Lato"
+    font-paths: _extensions/folium/fonts
+    margin-left: 2.15cm
+    margin-right: 2.15cm
+    margin-top: 3cm
+    margin-bottom: 3cm
+```
+
+Document frontmatter supplies the report text:
+
+```yaml
+---
+title: Report title
+subtitle: NBIS Support 0000
+description: Short project description.
+date: last-modified
+date-format: "DD MMM YYYY"
+---
+```
+
+Use `##` for top-level body headings because the document title occupies level 1.
+
+## Contents and columns
+
+For a contents page, add:
+
+````markdown
+```{=typst}
+#outline()
+#pagebreak()
+```
+````
+
+For a two-column report, set `columns: 2`. The cover remains one column automatically. Keep the contents page one column with:
+
+````markdown
+```{=typst}
+#single-column[
+  #outline()
+  #pagebreak()
+]
+```
+````
+
+See `demo-2col.qmd` for a complete example.
+
+## Render
+
+Render one PDF:
+
+```bash
+quarto render report.qmd --to folium-typst
+```
+
+Render the full project:
+
+```bash
+quarto render
+```
+
+Output is written to `docs/`. Standard Quarto Markdown features such as citations, cross-references, tables, figures, callouts, and code blocks are supported.

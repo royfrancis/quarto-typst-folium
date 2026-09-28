@@ -10,3 +10,5 @@ contributes:
         - typst-show.typ
       filters:
         - folium.lua
+      font-paths:
+        - _extensions/folium/fonts

@@ -1,5 +1,5 @@
-work.typ
+.DS_Store
+AGENTS.md
 README.md
-demo.pdf
-index.pdf
-assets/typst.png
+*.pdf
+reports/demo*.typ

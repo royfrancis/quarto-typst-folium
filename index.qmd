@@ -1,63 +1,15 @@
 ---
-title: Single cell transcriptional response to alkylating compounds
-subtitle: A short subtitle
-description: A longer description of the project describing the scientific goals and data type or methodology details.
-date: last-modified
-date-format: "DD MMM YYYY"
-
-
-format:
-  folium-typst:
-    font-paths: fonts
-    papersize: "a4"
-    margin-left: 2.15cm
-    margin-right: 2.15cm
-    margin-top: 3cm
-    margin-bottom: 3cm
-
-folium:
-  id: "NBIS SUPPORT 0000"
-  class: "TECHNICAL REPORT"
-  logo: 
-     path: assets/nbis-scilifelab.svg
-  logo-height: 0.8cm
-  font-size: 12pt
-  background: 
-     path: assets/bg.png
-  investigator: 
-    - name: "John Doe"
-      email: "john.doe@email.com"
-      org: "Some university"
-    - name: "Jane Doe"
-      email: "jane.doe@email.com"
-      org: "Another university"
-    - name: "Jane Doe"
-      email: "jane.doe@email.com"
-      org: "Another university"
-  pi:
-    - name: "John Doe"
-      email: "john.doe@email.com"
-      org: "Some university"
-    - name: "Jane Doe"
-      email: "jane.doe@email.com"
-      org: "Another university"
-  analyst:
-    - name: "John Doe"
-      email: "john.doe@email.com"
-      org: "Some university"
-    - name: "Jane Doe"
-      email: "jane.doe@email.com"
-      org: "Another university"
+title: "typst-folium"
+format: html
 ---
 
-## Introduction
+This is a quarto template for generating PDF reports with Typst engine.
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+- [Usage guide](reports/usage.html)
 
-## Results
+View sample PDFs:
 
-Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?
-
-### Subsection
-
-Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
+- [Minimal report](reports/report.pdf)
+- [Full demo report](reports/demo.pdf)
+- [Demo report with margin column](reports/demo-margin-column.pdf)
+- [Full 2-column demo report](reports/demo-2col.pdf)

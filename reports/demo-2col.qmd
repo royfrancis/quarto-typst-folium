@@ -1,0 +1,582 @@
+---
+title: Demo Report 2 Columns
+subtitle: Demo report with 2 columns
+description: "This document showcases some of the in-built capabilities of quarto. It also shows the custom theme, style and usage."
+date: today
+date-format: "DD MMM YYYY"
+
+format:
+  folium-typst:
+    columns: 2
+bibliography:
+  - references.bib
+---
+
+```{=typst}
+#single-column[
+  #outline()
+  #pagebreak()
+]
+```
+
+## Introduction
+
+This is a [quarto](https://quarto.org/) document that is rendered through typst into a PDF document. Working with Typst in Quarto is covered [here](https://quarto.org/docs/output-formats/typst.html). You can mostly use markdown syntax to author your document. This demo document showcases some of the common formatting options available in markdown along with some typst specific features. For some features and more control, typst code is used.
+
+The outline at the beginning of the document is generated using the typst function `` `#outline()`{=typst} ``. A page break is added using `` `#pagebreak()`{=typst} ``.
+
+## Text formatting
+
+### Headings
+
+```
+## Level 2 heading
+### Level 3 heading
+#### Level 4 heading
+##### Level 5 heading
+###### Level 6 heading
+```
+
+### Character sizes
+
+Custom text sizes are provided by this template.
+
+|Markdown|Rendered|
+|---|---|
+|`[Largest text]{.largest}`|[Largest text]{.largest}|
+|`[Larger text]{.larger}`|[Larger text]{.larger}|
+|`[Large text]{.large}`|[Large text]{.large}|
+|Normal text |Normal text|
+|`[Small text]{.small}`|[Small text]{.small}|
+|`[Smaller text]{.smaller}`|[Smaller text]{.smaller}|
+|`[Smallest text]{.smallest}`|[Smallest text]{.smallest}|
+
+### Character styles
+
+|Markdown|Rendered|
+|---|---|
+|`__Bold text__`|__Bold text__|
+|`_Italic text_`|_Italic text_|
+|`~~Strikethrough~~`|~~Strikethrough~~|
+|`H~2~O`|H~2~O|
+|`x^2^`|x^2^|
+|`--`|--|
+|`---`|---|
+|`[link](https://example.com/)`|[link](https://example.com/)|
+|`{{{< kbd Shift-Ctrl-P >}}}`|{{< kbd Shift-Ctrl-P >}}|
+
+Here is how to add formatting using typst functions:
+
+|Typst|Rendered|
+|---|---|
+|`` `#underline[text]`{=typst} ``|`#underline[text]`{=typst}|
+|`` `#highlight[text]`{=typst} ``|`#highlight[text]`{=typst}|
+|`` `H#sub[2]O`{=typst} ``|`H#sub[2]O`{=typst}|
+|`` `x#super[2]`{=typst} ``|`x#super[2]`{=typst}|
+|`` `#badge([badge])`{=typst} ``|`#badge([badge])`{=typst}|
+|`` `#badge-primary([badge])`{=typst} ``|`#badge-primary([badge])`{=typst}|
+|`` `#badge-secondary([badge])`{=typst} ``|`#badge-secondary([badge])`{=typst}|
+|`` `#badge-tertiary([badge])`{=typst} ``|`#badge-tertiary([badge])`{=typst}|
+
+Here is a rectangle `` `#rect(width: 1cm)`{=typst} ``  
+
+`#rect(width: 1cm)`{=typst}
+
+Let's generate some random text `` `#lorem(10)`{=typst} ``
+
+`#lorem(10)`{=typst}
+
+This is a citation `@example2024` rendered as @example2024.  
+The bibliography is listed at the end of the document.
+
+### Blockquote
+
+```
+> This is a block quote. This
+> paragraph has two lines.
+>
+> 1. This is a list inside a block quote.
+> 2. Second item.
+```
+
+> This is a block quote. This paragraph has two lines.
+>
+> 1.  This is a list inside a block quote.
+> 2.  Second item.
+
+### Line block
+
+A line block preserves spaces and line breaks.
+
+```
+| This
+|     block
+|          preserves
+|                   formatting
+```
+
+| This
+|     block
+|          preserves
+|                   formatting
+
+### Rule
+
+A horizontal line can be created using three or more `*` or `-`.
+
+`***`
+
+------------------------------------------------------------------------
+
+### Footnote
+
+An example of a footnote reference.[^1]
+
+[^1]: That reference refers to this footnote.
+
+## Code formatting
+
+Verbatim code is text formatted in a monospaced font and intended to be read as code. Inline verbatim code is enclosed in backticks, so `` `date()` `` renders as `date()`.
+
+Verbatim code can also be placed in fenced code blocks.
+
+````
+```
+date()
+```
+````
+
+```
+date()
+```
+
+Source code, that is, code that is syntax-highlighted or executed in a Quarto document, is not covered here in this document.
+
+## Lists
+
+### Unordered
+
+Unordered lists are created using dashes.
+
+```
+- Bullet 1
+- Bullet 2
+  - Sub-bullet 2.1
+  - Sub-bullet 2.2
+- Bullet 3
+```
+
+- Bullet 1
+- Bullet 2
+  - Sub-bullet 2.1
+  - Sub-bullet 2.2
+- Bullet 3
+
+### Ordered
+
+Ordered lists are created using numbers.
+
+```
+1. Point 1
+2. Point 2
+3. Point 3
+```
+
+1. Point 1
+2. Point 2
+3. Point 3
+
+### Multiple lists
+
+```
+::: {}
+1. Point 1
+2. Point 2
+:::
+
+::: {}
+1. Point 1
+2. Point 2
+:::
+```
+
+::: {}
+1. Point 1
+2. Point 2
+:::
+
+::: {}
+1. Point 1
+2. Point 2
+:::
+
+## Images
+
+Images can be inserted using Markdown or Typst code. In Markdown, Quarto attributes can control image properties.
+
+### Using Markdown
+
+Using regular Markdown.
+
+```
+![](assets/image.webp)
+```
+
+![](assets/image.webp)
+
+By default, an image uses its actual size, constrained by the available width. You can change its displayed dimensions as shown below.
+
+```
+![This is a caption](assets/image.webp){width=30%}
+```
+
+![This is a caption](assets/image.webp){width="30%"}
+
+This image is now 30% of the available width.
+
+#### Figure layout
+
+```
+::: {#fig-mylabel layout-ncol=2}
+![Caption for figure 1](assets/image.webp){width="40%"}
+
+![Caption for figure 2](assets/image.webp){width="40%"}
+
+These figures are interesting.
+:::
+```
+
+::: {#fig-mylabel layout-ncol="2"}
+![Caption for figure 1](assets/image.webp){width="40%"}
+
+![Caption for figure 2](assets/image.webp){width="40%"}
+
+These figures are interesting.
+:::
+
+More figure options and layouts are described [here](https://quarto.org/docs/authoring/figures.html). Cross-referencing is described [here](https://quarto.org/docs/authoring/cross-references.html).
+
+### Using Typst
+
+````
+```{=typst}
+#image("assets/image.webp", width: 30%)
+```
+````
+
+```{=typst} 
+#image("assets/image.webp", width: 30%)
+```
+
+````
+```{=typst}
+#figure(
+  image("assets/image.webp", width: 30%),
+  caption: [This is a caption.]
+)
+```
+````
+
+```{=typst} 
+#figure(
+  image("assets/image.webp", width: 30%),
+  caption: [This is a caption.]
+)
+```
+
+For more information on figures, see [here](https://quarto.org/docs/authoring/figures.html). Images generated through code are not covered here.
+
+## Math expressions
+
+Some examples of rendering equations.
+
+```
+$e^{i\pi} + 1 = 0$
+```
+
+$e^{i\pi} + 1 = 0$
+
+```
+$$\frac{E \times X^2 \prod I}{2+7} = 432$$
+```
+
+$$\frac{E \times X^2 \prod I}{2+7} = 432$$
+
+```
+$$\sum_{i=1}^n X_i$$
+```
+
+$$\sum_{i=1}^n X_i$$
+
+```
+$$\int_0^{2\pi} \sin x~dx$$
+```
+
+$$\int_0^{2\pi} \sin x~dx$$
+
+```
+$\left( \sum_{i=1}^{n}{i} \right)^2 = \left( \frac{n(n-1)}{2}\right)^2 = \frac{n^2(n-1)^2}{4}$
+```
+
+$\left( \sum_{i=1}^{n}{i} \right)^2 = \left( \frac{n(n-1)}{2}\right)^2 = \frac{n^2(n-1)^2}{4}$
+
+```
+$\begin{eqnarray} X & \sim & \mathrm{N}(0,1)\\ Y & \sim & \chi^2_{n-p}\\ R & \equiv & X/Y \sim t_{n-p} \end{eqnarray}$
+```
+
+$\begin{eqnarray} X & \sim & \mathrm{N}(0,1)\\ Y & \sim & \chi^2_{n-p}\\ R & \equiv & X/Y \sim t_{n-p} \end{eqnarray}$
+
+```
+$\begin{eqnarray} P(|X-\mu| > k) & = & P(|X-\mu|^2 > k^2)\\ & \leq & \frac{\mathbb{E}\left[|X-\mu|^2\right]}{k^2}\\ & \leq & \frac{\mathrm{Var}[X]}{k^2} \end{eqnarray}$
+```
+
+$\begin{eqnarray} P(|X-\mu| > k) & = & P(|X-\mu|^2 > k^2)\\ & \leq & \frac{\mathbb{E}\left[|X-\mu|^2\right]}{k^2}\\ & \leq & \frac{\mathrm{Var}[X]}{k^2} \end{eqnarray}$
+
+## Tables
+
+
+For simple cases, tables can be manually created in Markdown.
+
+```
+|speed|dist|
+|-----|----|
+|4    |   2|
+|4    |  10|
+|7    |   4|
+```
+
+| speed | dist |
+|-------|------|
+| 4     | 2    |
+| 4     | 10   |
+| 7     | 4    |
+
+Table captions and numbering can be added as follows:
+
+```
+|speed|dist|
+|-----|----|
+|4    |   2|
+|4    |  10|
+|7    |   4|
+
+: These are exciting results. {#tbl-mylabel}
+```
+
+| speed | dist |
+|-------|------|
+| 4     | 2    |
+| 4     | 10   |
+| 7     | 4    |
+
+: These are exciting results. {#tbl-mylabel}
+
+Tables can also be generated through code which is not covered here.
+
+See the [tables documentation](https://quarto.org/docs/authoring/tables.html) for more information.
+
+### Cross-referencing
+
+Figures and tables can be numbered by adding an identifier beginning with `fig-` or `tbl-`, such as `{#tbl-mylabel}`. Reference it with `@tbl-mylabel`, which renders as @tbl-mylabel.
+
+## Icons
+
+### FontAwesome icons
+
+[FontAwesome icons](https://fontawesome.com/search?ip=classic&ic=free-collection) are made available in this template. FA6 and FA7 are supported. For more details on the Typst package that enables this, see [here](https://typst.app/universe/package/fontawesome/).
+
+|Typst|Rendered|
+|---|:---:|
+|`` `#fa-icon("lightbulb")`{=typst} ``|`#fa-icon("lightbulb")`{=typst}|
+|`` `#fa-icon("lightbulb", solid:true)`{=typst} ``|`#fa-icon("lightbulb", solid:true)`{=typst}|
+|`` `#fa-icon("laptop")`{=typst} ``|`#fa-icon("laptop")`{=typst}|
+|`` `#fa-icon("cloud")`{=typst} ``|`#fa-icon("cloud")`{=typst}|
+|`` `#fa-icon("github")`{=typst} ``|`#fa-icon("github")`{=typst}|
+|`` `#fa-icon("exclamation-circle", size:15pt)`{=typst} ``|`#fa-icon("exclamation-circle", size:15pt)`{=typst}|
+
+## Call-Outs
+
+Call-Out blocks are explained [here](https://quarto.org/docs/authoring/callouts.html).
+
+```
+::: {.callout-note}
+Use notes for supplementary context that does not require the reader to take action. This should be the default for most things.
+:::
+
+::: {.callout-tip}
+Use tips for optional advice that can make a task easier or more efficient.
+:::
+
+::: {.callout-caution}
+Use cautions when an action could have unwanted consequences that the reader should consider first.
+:::
+
+::: {.callout-warning}
+Use warnings for actions that could cause mistakes, data loss, or other significant problems.
+:::
+
+::: {.callout-important}
+Use important callouts for essential information the reader must understand before continuing.
+:::
+```
+
+::: {.callout-note}
+Use notes for supplementary context that does not require the reader to take action. This should be the default for most things.
+:::
+
+::: {.callout-tip}
+Use tips for optional advice that can make a task easier or more efficient.
+:::
+
+::: {.callout-caution}
+Use cautions when an action could have unwanted consequences that the reader should consider first.
+:::
+
+::: {.callout-warning}
+Use warnings for actions that could cause mistakes, data loss, or other significant problems.
+:::
+
+::: {.callout-important}
+Use important callouts for essential information the reader must understand before continuing.
+:::
+
+Callout variations.
+
+Simple appearance
+
+```
+::: {.callout-note appearance="simple"}
+This is a callout with a simple appearance.
+:::
+```
+
+::: {.callout-note appearance="simple"}
+This is a callout with a simple appearance.
+:::
+
+Minimal appearance
+
+```
+::: {.callout-note appearance="minimal"}
+This is a callout with a minimal appearance.
+:::
+```
+
+::: {.callout-note appearance="minimal"}
+This is a callout with a minimal appearance.
+:::
+
+## Layout
+
+### Inline style
+
+`[Content inline]{style="background-color: gray"}`
+
+[Content inline]{style="background-color: gray"}
+
+### Block style
+
+```
+::: {style="background-color: gray"}
+Content inside block
+:::
+```
+
+::: {style="background-color: gray"}
+Content inside block
+:::
+
+### Hidden block
+
+```
+::: {.hidden}
+Hidden content
+:::
+```
+
+### Conditional content
+
+````
+::: {{.content-visible when-format="html"}}
+Will only appear in HTML.
+:::
+````
+
+````
+::: {{.content-hidden when-format="html"}}
+Will not appear in HTML.
+:::
+````
+
+Conditional content is documented [here](https://quarto.org/docs/authoring/conditional.html).
+
+### Typst blocks
+
+````
+::: {.block fill="olive" inset="8pt" radius="4pt"}
+
+This is a block with olive background and rounded corners.
+
+:::
+````
+
+::: {.block fill="olive" inset="8pt" radius="4pt"}
+
+This is a block with olive background and rounded corners.
+
+:::
+
+## Shortcodes
+
+Quarto shortcodes are special Markdown directives that generate content.
+
+The `meta` shortcode prints values from document metadata, including metadata inherited from `_quarto.yml`. Here are a few examples:
+
+`{{{< meta title >}}}` {{< meta title >}}
+
+`{{{< meta description >}}}` {{< meta description >}}
+
+The `var` shortcode prints values from `_variables.yml`, `include` inserts another `.qmd` file, and `kbd` renders keyboard shortcuts:
+
+`Press {{{< kbd Shift-Ctrl-P >}}}` Press {{< kbd Shift-Ctrl-P >}}
+
+The custom Lua filter adds the following metadata values, which can be read with the built-in `meta` shortcode:
+
+`{{{< meta quarto_version >}}}` {{< meta quarto_version >}}  
+`{{{< meta current_date >}}}` {{< meta current_date >}}  
+`{{{< meta current_year >}}}` {{< meta current_year >}}  
+`{{{< meta current_time >}}}` {{< meta current_time >}}  
+`{{{< meta output-dir >}}}` {{< meta output-dir >}}  
+`{{{< meta output-dir-path >}}}` {{< meta output-dir-path >}}  
+
+The filter also exposes supported values from the **website**, **project**, and **format** blocks of `_quarto.yml` through the **custom.** prefix.
+
+`{{{< meta custom.website.site-url >}}}` {{< meta custom.website.site-url >}}  
+`{{{< meta custom.project.type >}}}` {{< meta custom.project.type >}}  
+`{{{< meta custom.format.html.theme >}}}` {{< meta custom.format.html.theme >}}  
+
+Shortcodes are documented [here](https://quarto.org/docs/authoring/shortcodes.html).
+
+## General tips
+
+-   Use level-2 headings (`##`) as the highest heading level:
+
+  ```markdown
+  ## Section A
+  ```
+
+```
+## Section A
+```
+
+-  To add a bibliography, use the following:
+
+```
+::: {#refs}
+:::
+```
+
+::: {#refs}
+:::
+
+-   See the [Quarto documentation](https://quarto.org/)

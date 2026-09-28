@@ -1,0 +1,8 @@
+.DS_Store
+/*.typ
+/.quarto/
+**/*.quarto_ipynb
+docs
+*_files
+todo.txt
+*.pdf
