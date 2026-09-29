@@ -2,7 +2,7 @@
 
 // fontawesome
 // https://github.com/duskmoon314/typst-fontawesome
-#import "/_extensions/folium/assets/fontawesome/lib.typ": *
+#import "$folium-fontawesome-path$/lib.typ".replace("\\", ""): *
 
 // accepts a color literal (color) or string (e.g., "#1D293D") and returns a usable color
 #let parse-color(value, fallback) = {

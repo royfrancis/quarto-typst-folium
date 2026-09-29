@@ -17,6 +17,9 @@ This is a Quarto extension that provides a Typst template for NBIS PDF reports. 
 Install the extension:
 
 ```bash
+# install as extension
+quarto add royfrancis/quarto-typst-folium
+# install as template
 quarto use template royfrancis/quarto-typst-folium
 ```
 
@@ -76,7 +79,7 @@ Standard Quarto format options such as `mainfont` are also supported:
 format:
   folium-typst:
     mainfont: "Lato"
-    font-paths: _extensions/folium/fonts  # path to custom fonts
+    font-paths: assets/fonts  # add your own font directory here; merges with the extension's bundled fonts
 ```
 
 ## Documentation

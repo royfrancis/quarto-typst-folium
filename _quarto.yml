@@ -16,6 +16,8 @@ website:
         href: "index.qmd"
       - text: "Usage"
         href: "reports/usage.qmd"
+      - text: "Versions"
+        href: "CHANGELOG.md"
   page-footer:
     border: false
     left: "{{< meta current_year >}} [NBIS](https://nbis.se)"
@@ -35,7 +37,6 @@ format:
     section-numbering: 1.1.1
     columns: 1
     mainfont: "Lato"
-    font-paths: _extensions/folium/fonts
     papersize: "a4"
     margin-left: 2.15cm
     margin-right: 2.15cm

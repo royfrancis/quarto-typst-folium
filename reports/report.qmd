@@ -14,7 +14,6 @@ format:
     section-numbering: 1.1.1
     columns: 1
     mainfont: "Lato"
-    font-paths: _extensions/folium/fonts
     papersize: "a4"
     margin-left: 2.15cm
     margin-right: 2.15cm

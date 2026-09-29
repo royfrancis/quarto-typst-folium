@@ -50,7 +50,6 @@ format:
     papersize: a4
     columns: 1
     mainfont: "Lato"
-    font-paths: _extensions/folium/fonts
     margin-left: 2.15cm
     margin-right: 2.15cm
     margin-top: 3cm

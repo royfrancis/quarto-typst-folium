@@ -1,5 +1,9 @@
 ## Changelog
 
+### v0.0.2
+
+- Updated configuration files for font paths and installation instructions
+
 ### v0.0.1
 
 - 28-Sep-2026
