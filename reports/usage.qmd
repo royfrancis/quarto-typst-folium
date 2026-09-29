@@ -42,7 +42,14 @@ nbis:
 
 `name` is required. `email` is optional. `affiliation` and `roles` accept either a string or a list. Contributors without a role appear under **Contributor**.
 
-Configure PDF defaults under `format.folium-typst`:
+The extension provides the PDF defaults, including A4 paper, Lato, one column, section numbering, a table of contents, and report margins. Enable the format in `_quarto.yml` with:
+
+```yaml
+format:
+  folium-typst: default
+```
+
+Project or document settings override these defaults. For example:
 
 ```yaml
 format:
@@ -54,6 +61,7 @@ format:
     margin-right: 2.15cm
     margin-top: 3cm
     margin-bottom: 3cm
+    toc: false
 ```
 
 Document frontmatter supplies the report text:

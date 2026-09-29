@@ -29,19 +29,7 @@ format:
     image: "assets/images/seo
     .webp"
     title-block-banner: "assets/images/banner.png"
-  folium-typst:
-    keep-typ: false
-    toc: true
-    toc-depth: 3
-    number-sections: true
-    section-numbering: 1.1.1
-    columns: 1
-    mainfont: "Lato"
-    papersize: "a4"
-    margin-left: 2.15cm
-    margin-right: 2.15cm
-    margin-top: 3cm
-    margin-bottom: 3cm
+  folium-typst: default
 
 nbis:
   id: "0000"

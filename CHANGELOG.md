@@ -3,6 +3,7 @@
 ### v0.0.2
 
 - Updated configuration files for font paths and installation instructions
+- Default format settings are defined in the extension itself
 
 ### v0.0.1
 

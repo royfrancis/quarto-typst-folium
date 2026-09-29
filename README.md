@@ -32,6 +32,8 @@ format:
 
 ## Configuration
 
+The extension has default settings and specifying `format.folium-typst` override these defaults.
+
 The template supports the standard Quarto `title`, `subtitle`, `description` and `date` fields. Skip the `author` field as persons are specified under `nbis.contributors`.
 
 Additional configuration is provided under the `nbis` key:
@@ -73,7 +75,7 @@ nbis:
 
 `name` is required. `email` is optional, while `affiliation` and `roles` each accept either a string or a list. Contributors without a role are grouped under `Contributor`. Role groups and people retain their order from the YAML.
 
-Standard Quarto format options such as `mainfont` are also supported:
+Standard Quarto format options are also supported and can override the extension defaults. For example, to use a custom font:
 
 ```yaml
 format:

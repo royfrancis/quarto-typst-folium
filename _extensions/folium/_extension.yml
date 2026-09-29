@@ -5,6 +5,18 @@ quarto-required: ">=1.4.533"
 contributes:
   formats:
     typst:
+      keep-typ: false
+      toc: true
+      toc-depth: 3
+      number-sections: true
+      section-numbering: 1.1.1
+      columns: 1
+      mainfont: "Lato"
+      papersize: "a4"
+      margin-left: 2.15cm
+      margin-right: 2.15cm
+      margin-top: 3cm
+      margin-bottom: 3cm
       template-partials:
         - typst-template.typ
         - typst-show.typ
