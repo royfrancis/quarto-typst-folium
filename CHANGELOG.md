@@ -4,6 +4,7 @@
 
 - Updated configuration files for font paths and installation instructions
 - Default format settings are defined in the extension itself
+- Background image, logo and related settings are also included in the extension
 
 ### v0.0.1
 

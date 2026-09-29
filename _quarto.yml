@@ -33,13 +33,6 @@ format:
 
 nbis:
   id: "0000"
-  class: "NBIS REPORT"
-  logo: 
-     path: assets/logos/nbis-scilifelab.svg
-  logo-height: 0.8cm
-  font-size: 12pt
-  background: 
-     path: assets/images/bg.png
   contributors:
     - name: "Person A"
       email: "name@nbis.se"

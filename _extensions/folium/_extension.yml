@@ -17,6 +17,14 @@ contributes:
       margin-right: 2.15cm
       margin-top: 3cm
       margin-bottom: 3cm
+      nbis:
+        class: "NBIS REPORT"
+        logo:
+          path: assets/nbis-scilifelab.svg
+        logo-height: 0.8cm
+        font-size: 12pt
+        background:
+          path: assets/bg.png
       template-partials:
         - typst-template.typ
         - typst-show.typ

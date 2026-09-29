@@ -17,18 +17,11 @@ Use `report.qmd` as the starting point. `demo.qmd` contains examples of supporte
 
 ## Configure the report
 
-Set project-wide cover information in `_quarto.yml`:
+Set report-specific cover information in `_quarto.yml`:
 
 ```yaml
 nbis:
   id: "0000"
-  class: "NBIS REPORT"
-  logo:
-    path: assets/logos/nbis-scilifelab.svg
-  logo-height: 0.8cm
-  font-size: 12pt
-  background:
-    path: assets/images/bg.png
   contributors:
     - name: "Person A"
       email: "name@nbis.se"
@@ -42,6 +35,19 @@ nbis:
 
 `name` is required. `email` is optional. `affiliation` and `roles` accept either a string or a list. Contributors without a role appear under **Contributor**.
 
+The cover defaults to class `NBIS REPORT`, the bundled NBIS logo and background, a logo height of `0.8cm`, and a font size of `12pt`. Override any of them under `nbis`:
+
+```yaml
+nbis:
+  class: "NBIS PROJECT PLAN"
+  logo:
+    path: assets/logos/custom-logo.svg
+  logo-height: 1cm
+  font-size: 11pt
+  background:
+    path: assets/images/custom-bg.png
+```
+
 The extension provides the PDF defaults, including A4 paper, Lato, one column, section numbering, a table of contents, and report margins. Enable the format in `_quarto.yml` with:
 
 ```yaml
@@ -54,13 +60,8 @@ Project or document settings override these defaults. For example:
 ```yaml
 format:
   folium-typst:
-    papersize: a4
-    columns: 1
-    mainfont: "Lato"
-    margin-left: 2.15cm
-    margin-right: 2.15cm
-    margin-top: 3cm
-    margin-bottom: 3cm
+    papersize: us-letter
+    columns: 2
     toc: false
 ```
 

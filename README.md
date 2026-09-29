@@ -32,7 +32,7 @@ format:
 
 ## Configuration
 
-The extension has default settings and specifying `format.folium-typst` override these defaults.
+The extension supplies the report layout and cover defaults. Settings under `format.folium-typst` or `nbis` override them.
 
 The template supports the standard Quarto `title`, `subtitle`, `description` and `date` fields. Skip the `author` field as persons are specified under `nbis.contributors`.
 
@@ -46,14 +46,6 @@ date: "20 DEC 2025"
 
 nbis:
   id: "5426"                   # Support issue ID
-  class: "NBIS REPORT"              # e.g., REPORT, PROJECT PLAN 
-  logo: 
-     path: "path/to/logo.svg"    # Path to the logo image
-  logo-height: 0.8cm           # Must include a Typst length unit (cm, pt, etc.)
-  font-size: 12pt
-  background: 
-     path: "path/to/bg.png"      # Path to the background image
-     
   contributors:
     - name: "Person A"
       email: "name@nbis.se"
@@ -74,6 +66,19 @@ nbis:
 ```
 
 `name` is required. `email` is optional, while `affiliation` and `roles` each accept either a string or a list. Contributors without a role are grouped under `Contributor`. Role groups and people retain their order from the YAML.
+
+The cover defaults to class `NBIS REPORT`, the bundled NBIS logo and background, a logo height of `0.8cm`, and a font size of `12pt`. Override any of them under `nbis`:
+
+```yaml
+nbis:
+  class: "NBIS PROJECT PLAN"
+  logo:
+    path: "path/to/logo.svg"
+  logo-height: 1cm
+  font-size: 11pt
+  background:
+    path: "path/to/bg.png"
+```
 
 Standard Quarto format options are also supported and can override the extension defaults. For example, to use a custom font:
 
