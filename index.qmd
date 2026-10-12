@@ -3,7 +3,7 @@ title: "typst-folium"
 format: html
 ---
 
-This is a quarto template for generating PDF reports with Typst engine.
+This is a Quarto template for generating PDF reports with the Typst engine.
 
 - [Usage guide](reports/usage.html)
 

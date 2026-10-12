@@ -1,8 +1,10 @@
 .DS_Store
 /*.typ
+/reports/*.typ
 /.quarto/
 **/*.quarto_ipynb
 docs
 *_files
 todo.txt
 *.pdf
+.claude

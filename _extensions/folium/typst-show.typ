@@ -1,6 +1,13 @@
+// fontawesome
+// https://github.com/duskmoon314/typst-fontawesome
+// Imported here rather than in typst-template.typ because Quarto injects its own
+// `@preview/fontawesome` import into the header (whenever a callout is used),
+// which sits between the two partials and would otherwise shadow this copy.
+#import "$folium-assets.fontawesome$/lib.typ".replace("\\", ""): *
+
 #show: folium.with(
-  $if(nbis.class)$
-    class: [$nbis.class$],
+  $if(folium.class)$
+    class: [$folium.class$],
   $endif$
 
   $if(title)$
@@ -52,27 +59,39 @@
     ),
   $endif$
 
-  $if(nbis.background)$
+  $if(folium.background)$
     background: (
-      path: "$nbis.background.path$"
+      path: "$folium.background.path$"
     ), 
   $endif$
 
-  $if(nbis.logo)$
+  $if(folium.logo)$
     logo: (
-      path: "$nbis.logo.path$"
+      path: "$folium.logo.path$"
     ), 
   $endif$
 
-  $if(nbis.logo-height)$
-    logo-height: $nbis.logo-height$,
+  $if(folium.logo-height)$
+    logo-height: $folium.logo-height$,
   $endif$
 
-  $if(nbis.font-size)$
-    font-size: $nbis.font-size$,
+  $if(folium.font-size)$
+    font-size: $folium.font-size$,
   $endif$
 
   $if(mainfont)$
     mainfont: "$mainfont$",
+  $endif$
+
+  $if(lang)$
+    lang: "$lang$",
+  $endif$
+
+  $if(region)$
+    region: "$region$",
+  $endif$
+
+  $if(section-numbering)$
+    sectionnumbering: "$section-numbering$",
   $endif$
 )

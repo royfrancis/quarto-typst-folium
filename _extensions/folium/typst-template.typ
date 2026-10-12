@@ -1,25 +1,5 @@
 // typst-folium
-
-// fontawesome
-// https://github.com/duskmoon314/typst-fontawesome
-#import "$folium-fontawesome-path$/lib.typ".replace("\\", ""): *
-
-// accepts a color literal (color) or string (e.g., "#1D293D") and returns a usable color
-#let parse-color(value, fallback) = {
-  if value == none {
-    return fallback
-  }
-  if type(value) == color {
-    return value
-  }
-  if type(value) == str {
-    let cleaned = value.replace("\\#", "#").trim()
-    if cleaned.starts-with("#") {
-      return rgb(cleaned)
-    }
-  }
-  fallback
-}
+// (fontawesome is imported in typst-show.typ)
 
 #let resource-path(path) = path.replace("\\", "")
 
@@ -38,7 +18,7 @@
 #let color-secondary = rgb("#BDD775")
 #let color-tertiary = rgb("#E9F2D1")
 
-#let default-font-size = 11pt
+#let default-font-size = 12pt
 #let default-font = "Lato"
 #set par(leading: 0.7em)
 
@@ -49,7 +29,7 @@
   baseline: 4pt,
   radius: 3pt,
   stroke: none,
-  text(size: default-font-size * 0.8, weight: 600, fill: color-text, content),
+  text(size: 0.8em, weight: 600, fill: color-text, content),
 )
 
 #let badge-secondary(content) = box(
@@ -58,7 +38,7 @@
   baseline: 4pt,
   radius: 3pt,
   stroke: none,
-  text(size: default-font-size * 0.8, weight: 600, fill: color-text, content),
+  text(size: 0.8em, weight: 600, fill: color-text, content),
 )
 
 #let badge-tertiary(content) = box(
@@ -67,7 +47,7 @@
   baseline: 4pt,
   radius: 3pt,
   stroke: none,
-  text(size: default-font-size * 0.8, weight: 600, fill: color-text, content),
+  text(size: 0.8em, weight: 600, fill: color-text, content),
 )
 #let badge = badge-secondary
 
@@ -86,26 +66,28 @@
 
 #show figure.caption: set text(size: 0.9em, fill: color-caption)
 
-#let blockquote(body) = [
-  #set text(size: 0.92em)
-  #block(
-    inset: (left: 1.5em, top: 0.2em, bottom: 0.2em),
-    stroke: (left: 4pt + color-secondary),
-  )[#body]
-]
+// Pandoc emits block quotes as #quote(block: true)[...]
+#show quote.where(block: true): it => block(
+  inset: (left: 1.5em, top: 0.2em, bottom: 0.2em),
+  stroke: (left: 4pt + color-secondary),
+  text(size: 0.92em, it.body),
+)
 
 #let horizontalrule = line(
   length: 100%,
   stroke: 1pt + color-secondary,
 )
 
-#let inline-code(content) = box(
-  fill: color-code,
-  inset: (x: 4pt, y: 1pt),
-  radius: 3pt,
-  stroke: none,
-  content,
-)
+// Inline code. `highlight` is used rather than `box` because a box cannot
+// break across lines: a long span would jump to the next line as a unit and
+// leave a gap, and trailing punctuation would land beside its first line.
+// `highlight` only paints behind the text and reserves no space, so the
+// padding is real horizontal space (`h`) outside plus an equal `extent`.
+#let inline-code(content) = {
+  h(3pt)
+  highlight(fill: color-code, radius: 3pt, extent: 3pt, content)
+  h(3pt)
+}
 
 #let callout-svg(view-box, path) = image(
   bytes("<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"#1c2833\" viewBox=\"" + view-box + "\"><path d=\"" + path + "\"/></svg>"),
@@ -135,6 +117,18 @@
 }
 
 // callout
+//
+// Quarto's cross-reference show rule (definitions.typ) rebuilds callouts that
+// have an id by position: the title block must hold the icon (optional) and
+// the title as its only children, and the title must be plain content, because
+// Quarto's `empty()` helper reads a styled element as an empty title. The bold
+// title style is therefore applied by a show rule on the title block, marked
+// with an imperceptible corner radius that nothing else uses, instead of
+// wrapping the title in `text()`. Quarto copies the block's fields when it
+// rebuilds it, so the marker survives.
+#let callout-title-marker = 0.01pt
+#show block.where(radius: callout-title-marker): set text(weight: 700, fill: color-callout-text)
+
 #let callout(
   body: [],
   title: "Callout",
@@ -153,16 +147,15 @@
       inset: 1pt,
       width: 100%,
       below: 0pt,
+      // Icon and title are adjacent, with no whitespace between them.
       block(
         fill: background_color,
         width: 100%,
         inset: 5pt,
-      )[
-        #if rendered-icon != none {
-          box(pad(right: 0.3em, text(fill: icon_color, rendered-icon)))
-        }
-        #text(weight: 700, fill: color-callout-text)[#title]
-      ],
+        radius: callout-title-marker,
+      )[#if rendered-icon != none {
+          box(pad(right: 0.5em, text(fill: icon_color, rendered-icon)))
+        }#title],
     )
       + if (body != []) {
         block(
@@ -180,7 +173,7 @@
 }
 
 // header/footer text style
-#let hf = content => text(size: default-font-size * 0.8, fill: color-black-light, tracking: 0.08em, content)
+#let hf = content => text(size: 0.8em, fill: color-black-light, tracking: 0.08em, content)
 
 // outline
 #set outline(title: pad(bottom: 1em, "Contents"))
@@ -200,8 +193,16 @@
   let logo-block = if logo == none { none } else {
     context {
       let m = page.margin
-      let margin-left = if m == auto { 2.5cm } else if type(m) == dictionary { m.at("left", default: 2.5cm) } else { m }
-      let margin-top = if m == auto { 2.5cm } else if type(m) == dictionary { m.at("top", default: 2.5cm) } else { m }
+      // A margin is a single length, auto, or a dictionary that may use any of
+      // left/right/top/bottom, x/y, inside/outside or rest. Take the first key
+      // present, in order of precedence.
+      let margin-side(keys) = {
+        if type(m) != dictionary { return if m == auto { 2.5cm } else { m } }
+        let key = keys.find(k => k in m)
+        if key == none or m.at(key) == auto { 2.5cm } else { m.at(key) }
+      }
+      let margin-left = margin-side(("left", "inside", "x", "rest"))
+      let margin-top = margin-side(("top", "y", "rest"))
       place(
         dx: margin-left,
         dy: margin-top,
@@ -263,9 +264,14 @@
   logo-height: 0.8cm,
   font-size: default-font-size,
   mainfont: default-font,
+  lang: "en",
+  region: none,
+  sectionnumbering: none,
   body,
 ) = {
-  set text(font: mainfont, fill: color-text, size: font-size)
+  set document(title: title)
+  set text(font: mainfont, fill: color-text, size: font-size, lang: lang, region: region)
+  set heading(numbering: sectionnumbering)
 
   let font-size-base = font-size
   let font-size-h1 = font-size-base * 1.802
@@ -276,7 +282,6 @@
   let font-size-h6 = font-size-base
 
   let font-size-class = font-size-base * 1.1
-  let font-size-footer = font-size-h6
   let font-size-title = font-size-h1 * 1.2
   let font-size-subtitle = font-size-h3
   let font-size-description = font-size-h5

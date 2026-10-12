@@ -1,7 +1,7 @@
 ---
 title: Demo Report 2 Columns
 subtitle: Demo report with 2 columns
-description: "This document showcases some of the in-built capabilities of quarto. It also shows the custom theme, style and usage."
+description: "This document showcases some of the built-in capabilities of Quarto. It also shows the custom theme, style and usage."
 date: today
 date-format: "DD MMM YYYY"
 
@@ -21,7 +21,7 @@ bibliography:
 
 ## Introduction
 
-This is a [quarto](https://quarto.org/) document that is rendered through typst into a PDF document. Working with Typst in Quarto is covered [here](https://quarto.org/docs/output-formats/typst.html). You can mostly use markdown syntax to author your document. This demo document showcases some of the common formatting options available in markdown along with some typst specific features. For some features and more control, typst code is used.
+This is a [Quarto](https://quarto.org/) document that is rendered through typst into a PDF document. Working with Typst in Quarto is covered [here](https://quarto.org/docs/output-formats/typst.html). You can mostly use markdown syntax to author your document. This demo document showcases some of the common formatting options available in markdown along with some typst specific features. For some features and more control, typst code is used.
 
 The outline at the beginning of the document is generated using the typst function `` `#outline()`{=typst} ``. A page break is added using `` `#pagebreak()`{=typst} ``.
 
@@ -381,9 +381,9 @@ Figures and tables can be numbered by adding an identifier beginning with `fig-`
 
 ## Icons
 
-### FontAwesome icons
+### Font Awesome icons
 
-[FontAwesome icons](https://fontawesome.com/search?ip=classic&ic=free-collection) are made available in this template. FA6 and FA7 are supported. For more details on the Typst package that enables this, see [here](https://typst.app/universe/package/fontawesome/).
+[Font Awesome icons](https://fontawesome.com/search?ip=classic&ic=free-collection) are made available in this template. FA6 and FA7 are supported. For more details on the Typst package that enables this, see [here](https://typst.app/universe/package/fontawesome/).
 
 |Typst|Rendered|
 |---|:---:|
@@ -394,9 +394,9 @@ Figures and tables can be numbered by adding an identifier beginning with `fig-`
 |`` `#fa-icon("github")`{=typst} ``|`#fa-icon("github")`{=typst}|
 |`` `#fa-icon("exclamation-circle", size:15pt)`{=typst} ``|`#fa-icon("exclamation-circle", size:15pt)`{=typst}|
 
-## Call-Outs
+## Callouts
 
-Call-Out blocks are explained [here](https://quarto.org/docs/authoring/callouts.html).
+Callout blocks are explained [here](https://quarto.org/docs/authoring/callouts.html).
 
 ```
 ::: {.callout-note}
@@ -559,17 +559,13 @@ Shortcodes are documented [here](https://quarto.org/docs/authoring/shortcodes.ht
 
 ## General tips
 
--   Use level-2 headings (`##`) as the highest heading level:
-
-  ```markdown
-  ## Section A
-  ```
+Use level-2 headings (`##`) as the highest heading level, because the document title occupies level 1:
 
 ```
 ## Section A
 ```
 
--  To add a bibliography, use the following:
+To add a bibliography, use the following:
 
 ```
 ::: {#refs}
@@ -579,4 +575,4 @@ Shortcodes are documented [here](https://quarto.org/docs/authoring/shortcodes.ht
 ::: {#refs}
 :::
 
--   See the [Quarto documentation](https://quarto.org/)
+See the [Quarto documentation](https://quarto.org/).

@@ -9,17 +9,17 @@ This is a Quarto extension that provides a Typst template for NBIS PDF reports. 
 - Cover page with contributors grouped by role
 - Customizable logo and background images
 - Structured layout for NBIS reports
-- Support for FontAwesome icons
-  - See fontawesome icons [here](https://fontawesome.com/search?ip=classic&ic=free-collection)
+- Support for Font Awesome icons
+  - See Font Awesome icons [here](https://fontawesome.com/search?ip=classic&ic=free-collection)
 
 ## Usage
 
-Install the extension:
+Requires Quarto 1.8 or later. Install the extension:
 
 ```bash
-# install as extension
+# install as extension (for an existing folium project)
 quarto add royfrancis/quarto-typst-folium
-# install as template
+# install as template (for a new project, adds quarto project files)
 quarto use template royfrancis/quarto-typst-folium
 ```
 
@@ -32,11 +32,11 @@ format:
 
 ## Configuration
 
-The extension supplies the report layout and cover defaults. Settings under `format.folium-typst` or `nbis` override them.
+The extension supplies the report layout and presentation defaults. Settings under `format.folium-typst` or `folium` override them.
 
 The template supports the standard Quarto `title`, `subtitle`, `description` and `date` fields. Skip the `author` field as persons are specified under `nbis.contributors`.
 
-Additional configuration is provided under the `nbis` key:
+Supply all NBIS-specific report data under `nbis`. The extension provides no defaults for this key:
 
 ```yaml
 title: "Title"
@@ -67,10 +67,10 @@ nbis:
 
 `name` is required. `email` is optional, while `affiliation` and `roles` each accept either a string or a list. Contributors without a role are grouped under `Contributor`. Role groups and people retain their order from the YAML.
 
-The cover defaults to class `NBIS REPORT`, the bundled NBIS logo and background, a logo height of `0.8cm`, and a font size of `12pt`. Override any of them under `nbis`:
+The cover defaults to class `NBIS REPORT`, the bundled NBIS logo and background, a logo height of `0.8cm`, and a font size of `12pt`. Override only the presentation values you need under `folium`; every omitted value retains its extension default:
 
 ```yaml
-nbis:
+folium:
   class: "NBIS PROJECT PLAN"
   logo:
     path: "path/to/logo.svg"
@@ -80,7 +80,27 @@ nbis:
     path: "path/to/bg.png"
 ```
 
-Standard Quarto format options are also supported and can override the extension defaults. For example, to use a custom font:
+To leave out the logo or the background image, set it to `false`:
+
+```yaml
+folium:
+  logo: false
+  background: false
+```
+
+Standard Quarto format options can override the extension defaults under `format.folium-typst`. Only the options you specify are changed. For example:
+
+```yaml
+format:
+  folium-typst:
+    papersize: us-letter
+    columns: 2
+    number-sections: false
+    margin-left: 2cm
+    margin-right: 2cm
+```
+
+To use a custom font:
 
 ```yaml
 format:
@@ -92,10 +112,6 @@ format:
 ## Documentation
 
 See project website [here](https://royfrancis.github.io/quarto-typst-folium) for examples and documentation.
-
-## Acknowledgements
-
-- Thanks to Typst packages for [FontAwesome icons](https://typst.app/universe/package/fontawesome/)
 
 ---
 

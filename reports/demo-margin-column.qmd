@@ -1,10 +1,12 @@
 ---
 title: Margin column
 description: This document demonstrates the use of margin columns in Quarto.
+format: 
+  folium-typst: default
 ---
 
 ::: {.callout-caution}
-Using these features result in the presence of a margin column and main column becomes narrower. This affects the whole document.
+Using these features adds a margin column, and the main column becomes narrower. This affects the whole document.
 :::
 
 ## Aside

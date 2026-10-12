@@ -1,10 +1,11 @@
 ---
 title: Demo Report
 subtitle: Demo report
-description: "This document showcases some of the in-built capabilities of quarto. It also shows the custom theme, style and usage."
+description: "This document showcases some of the built-in capabilities of Quarto. It also shows the custom theme, style and usage."
 date: today
 date-format: "DD MMM YYYY"
-
+format: 
+  folium-typst: default
 bibliography:
   - references.bib
 ---
@@ -15,7 +16,7 @@ bibliography:
 
 ## Introduction
 
-This is a [quarto](https://quarto.org/) document that is rendered through typst into a PDF document. Working with Typst in Quarto is covered [here](https://quarto.org/docs/output-formats/typst.html). You can mostly use markdown syntax to author your document. This demo document showcases some of the common formatting options available in markdown along with some typst specific features. For some features and more control, typst code is used.
+This is a [Quarto](https://quarto.org/) document that is rendered through typst into a PDF document. Working with Typst in Quarto is covered [here](https://quarto.org/docs/output-formats/typst.html). You can mostly use markdown syntax to author your document. This demo document showcases some of the common formatting options available in markdown along with some typst specific features. For some features and more control, typst code is used.
 
 The outline at the beginning of the document is generated using the typst function `` `#outline()`{=typst} ``. A page break is added using `` `#pagebreak()`{=typst} ``.
 
@@ -143,6 +144,8 @@ date()
 ```
 date()
 ```
+
+Long inline code wraps across lines like ordinary text, for example `quarto render reports/demo.qmd --to folium-typst --output-dir some/long/output/directory/name`, and the punctuation after it stays in place.
 
 Source code, that is, code that is syntax-highlighted or executed in a Quarto document, is not covered here in this document.
 
@@ -375,9 +378,9 @@ Figures and tables can be numbered by adding an identifier beginning with `fig-`
 
 ## Icons
 
-### FontAwesome icons
+### Font Awesome icons
 
-[FontAwesome icons](https://fontawesome.com/search?ip=classic&ic=free-collection) are made available in this template. FA6 and FA7 are supported. For more details on the Typst package that enables this, see [here](https://typst.app/universe/package/fontawesome/).
+[Font Awesome icons](https://fontawesome.com/search?ip=classic&ic=free-collection) are made available in this template. FA6 and FA7 are supported. For more details on the Typst package that enables this, see [here](https://typst.app/universe/package/fontawesome/).
 
 |Typst|Rendered|
 |---|:---:|
@@ -388,9 +391,9 @@ Figures and tables can be numbered by adding an identifier beginning with `fig-`
 |`` `#fa-icon("github")`{=typst} ``|`#fa-icon("github")`{=typst}|
 |`` `#fa-icon("exclamation-circle", size:15pt)`{=typst} ``|`#fa-icon("exclamation-circle", size:15pt)`{=typst}|
 
-## Call-Outs
+## Callouts
 
-Call-Out blocks are explained [here](https://quarto.org/docs/authoring/callouts.html).
+Callout blocks are explained [here](https://quarto.org/docs/authoring/callouts.html).
 
 ```
 ::: {.callout}
@@ -466,6 +469,20 @@ This is a callout with a minimal appearance.
 
 ::: {.callout-note appearance="minimal"}
 This is a callout with a minimal appearance.
+:::
+
+Cross-referenceable callout
+
+A callout with an id that starts with its type (`nte-`, `tip-`, `wrn-`, `cau-` or `imp-`) is numbered and can be referenced.
+
+```
+::: {#nte-example .callout-note title="Referenceable callout"}
+This callout can be referenced as @nte-example.
+:::
+```
+
+::: {#nte-example .callout-note title="Referenceable callout"}
+This callout can be referenced as @nte-example.
 :::
 
 ## Layout
@@ -561,17 +578,13 @@ Shortcodes are documented [here](https://quarto.org/docs/authoring/shortcodes.ht
 
 ## General tips
 
--   Use level-2 headings (`##`) as the highest heading level:
-
-  ```markdown
-  ## Section A
-  ```
+Use level-2 headings (`##`) as the highest heading level, because the document title occupies level 1:
 
 ```
 ## Section A
 ```
 
--  To add a bibliography, use the following:
+To add a bibliography, use the following:
 
 ```
 ::: {#refs}
@@ -581,5 +594,4 @@ Shortcodes are documented [here](https://quarto.org/docs/authoring/shortcodes.ht
 ::: {#refs}
 :::
 
--   See the [Quarto documentation](https://quarto.org/)
-
+See the [Quarto documentation](https://quarto.org/).

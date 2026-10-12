@@ -2,22 +2,29 @@
 title: Usage
 subtitle: Folium Typst template guide
 description: "Set up and render NBIS reports with the Folium Typst template."
-format: html
 ---
 
 ## Start a project
 
-Create a project from the template:
+Folium requires Quarto 1.8 or later. Create a project from the template:
 
 ```bash
 quarto use template royfrancis/quarto-typst-folium
 ```
 
-Use `report.qmd` as the starting point. `demo.qmd` contains examples of supported Quarto and Typst features.
+Use `reports/report.qmd` as the starting point. `reports/demo.qmd` contains examples of supported Quarto and Typst features. `reports/demo-2col.qmd` and `reports/demo-margin-column.qmd` show the two-column and margin-column layouts.
+
+To add the format to an existing project instead, install only the extension:
+
+```bash
+quarto add royfrancis/quarto-typst-folium
+```
+
+This adds `_extensions/` and nothing else, so there is no `_quarto.yml` to hold the report data. Set `nbis` in the frontmatter of each report.
 
 ## Configure the report
 
-Set report-specific cover information in `_quarto.yml`:
+Set all NBIS-specific report data in `_quarto.yml`, or in the frontmatter of a report when only the extension is installed. The extension provides no defaults for this key. A report that defines its own `nbis` in its frontmatter overrides the project-level data:
 
 ```yaml
 nbis:
@@ -35,10 +42,12 @@ nbis:
 
 `name` is required. `email` is optional. `affiliation` and `roles` accept either a string or a list. Contributors without a role appear under **Contributor**.
 
-The cover defaults to class `NBIS REPORT`, the bundled NBIS logo and background, a logo height of `0.8cm`, and a font size of `12pt`. Override any of them under `nbis`:
+`id` is the support issue number. It appears in the header of every page after the cover. To show it on the cover as well, add it to the subtitle with the `meta` shortcode, as `reports/report.qmd` does.
+
+The cover defaults to class `NBIS REPORT`, the bundled NBIS logo and background, a logo height of `0.8cm`, and a font size of `12pt`. Override only the presentation values you need under `folium`; every omitted value retains its extension default:
 
 ```yaml
-nbis:
+folium:
   class: "NBIS PROJECT PLAN"
   logo:
     path: assets/logos/custom-logo.svg
@@ -48,12 +57,24 @@ nbis:
     path: assets/images/custom-bg.png
 ```
 
-The extension provides the PDF defaults, including A4 paper, Lato, one column, section numbering, a table of contents, and report margins. Enable the format in `_quarto.yml` with:
+A path is relative to the file that sets it: to the project root in `_quarto.yml`, and to the report in its frontmatter. A report in `reports/` that uses a file from the project's `assets/` folder therefore needs `../assets/logos/custom-logo.svg`.
+
+To leave out the logo or the background image, set it to `false`:
+
+```yaml
+folium:
+  logo: false
+  background: false
+```
+
+The extension provides the PDF defaults, including A4 paper, Lato, one column, numbered sections, and report margins. Enable the format in the frontmatter of each report, as `reports/report.qmd` does:
 
 ```yaml
 format:
   folium-typst: default
 ```
+
+To make it the default for a whole project, set it under `format` in `_quarto.yml` instead. Every document that does not set its own `format` is then also rendered as a PDF, including website pages such as this guide.
 
 Project or document settings override these defaults. For example:
 
@@ -62,8 +83,12 @@ format:
   folium-typst:
     papersize: us-letter
     columns: 2
-    toc: false
+    number-sections: false
+    margin-left: 2cm
+    margin-right: 2cm
 ```
+
+The margins are set with `margin-left`, `margin-right`, `margin-top` and `margin-bottom`, which default to 2.15 cm, 2.15 cm, 3 cm and 3 cm. The cover logo is placed at the left and top margins.
 
 Document frontmatter supplies the report text:
 
@@ -77,11 +102,37 @@ date-format: "DD MMM YYYY"
 ---
 ```
 
-Use `##` for top-level body headings because the document title occupies level 1.
+Top-level headings can be written with `#` or `##`. If a document has no `#` headings, Quarto treats `##` as the top level, as the demos do, and numbering still starts at 1.
+
+## Language, numbering and fonts
+
+Set the document language with `lang`, and optionally `region`. The default is English. The language sets hyphenation, quotation marks and generated labels such as figure captions ("Figur 1") and callout titles ("Notera"). The `Contents` heading is the exception; see the next section.
+
+```yaml
+lang: sv
+region: SE
+```
+
+Sections are numbered `1`, `1.1`, `1.1.1` by default. Change the pattern with `section-numbering`, which takes a Typst numbering pattern, or turn numbering off with `number-sections: false`. This pattern numbers the sections `1`, `1.a`, `1.b`, and so on:
+
+```yaml
+format:
+  folium-typst:
+    section-numbering: "1.a"
+```
+
+The font is Lato. Use another font with `mainfont`, and add the folder that holds it with `font-paths`. The folder is added to the bundled fonts and does not replace them. It follows the same path rule as above, relative to the project root in `_quarto.yml` and to the report in its frontmatter:
+
+```yaml
+format:
+  folium-typst:
+    mainfont: "Open Sans"
+    font-paths: assets/fonts
+```
 
 ## Contents and columns
 
-For a contents page, add:
+The template does not add a contents page automatically. For a contents page, add:
 
 ````markdown
 ```{=typst}
@@ -89,6 +140,8 @@ For a contents page, add:
 #pagebreak()
 ```
 ````
+
+The heading is `Contents`, whichever `lang` is set. To change it, pass a title, for example `#outline(title: [Innehåll])`.
 
 For a two-column report, set `columns: 2`. The cover remains one column automatically. Keep the contents page one column with:
 
@@ -101,14 +154,16 @@ For a two-column report, set `columns: 2`. The cover remains one column automati
 ```
 ````
 
-See `demo-2col.qmd` for a complete example.
+See `reports/demo-2col.qmd` for a complete example.
+
+Content can also be placed in a margin column with the `.aside` and `.column-margin` classes. This narrows the main column for the whole document. See `reports/demo-margin-column.qmd` for examples.
 
 ## Render
 
 Render one PDF:
 
 ```bash
-quarto render report.qmd --to folium-typst
+quarto render reports/report.qmd --to folium-typst
 ```
 
 Render the full project:

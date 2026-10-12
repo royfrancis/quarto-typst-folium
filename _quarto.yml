@@ -6,7 +6,7 @@ website:
   open-graph: true
   site-url: "https://royfrancis.github.io/quarto-typst-folium/"
   image: "assets/images/seo.webp"
-  description: "A quarto PDF template for project reports."
+  description: "A Quarto PDF template for project reports."
   favicon: "assets/favicon.png"
   navbar:
     logo: "assets/logos/nbis-scilifelab.webp"
@@ -26,11 +26,10 @@ website:
 format:
   html:
     theme: "assets/css/styles.scss"
-    image: "assets/images/seo
-    .webp"
+    image: "assets/images/seo.webp"
     title-block-banner: "assets/images/banner.png"
-  folium-typst: default
 
+# Required NBIS project metadata; replace all placeholder values
 nbis:
   id: "0000"
   contributors:

@@ -6,29 +6,13 @@ date: last-modified
 date-format: "DD MMM YYYY"
 
 format:
-  folium-typst:
-    keep-typ: false
-    toc: true
-    toc-depth: 3
-    number-sections: true
-    section-numbering: 1.1.1
-    columns: 1
-    mainfont: "Lato"
-    papersize: "a4"
-    margin-left: 2.15cm
-    margin-right: 2.15cm
-    margin-top: 3cm
-    margin-bottom: 3cm
+  folium-typst: default
+
+folium:
+  class: "TECHNICAL REPORT"
 
 nbis:
   id: "0000"
-  class: "TECHNICAL REPORT"
-  logo: 
-      path: ../assets/logos/nbis-scilifelab.svg
-  logo-height: 0.8cm
-  font-size: 12pt
-  background: 
-      path: ../assets/images/bg.png
   contributors:
     - name: "Person A"
       email: "name@nbis.se"
@@ -36,14 +20,6 @@ nbis:
         - "NBIS"
         - "Uppsala University"
       roles: "NBIS Staff"
-    - name: "Person B"
-      email: "name@nbis.se"
-      affiliation: "NBIS"
-      roles: "NBIS Staff"
-    - name: "Name"
-      email: "name@email.com"
-      affiliation: "Some university"
-      roles: "User"
     - name: "Name"
       email: "name@email.com"
       affiliation: "Some university"
