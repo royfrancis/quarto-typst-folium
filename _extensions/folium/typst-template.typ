@@ -14,7 +14,6 @@
 #let color-caption = rgb("#496985")
 #let color-callout-border = rgb("#DEE2E6")
 #let color-primary = rgb("#95B540") // accent: borders, highlights, decoration
-#let color-primary-strong = rgb("#567318") // text and fills, 5.4:1 against white
 #let color-secondary = rgb("#BDD775")
 #let color-tertiary = rgb("#E9F2D1")
 #let color-tertiary-light = rgb("#F4F8E8")
@@ -404,7 +403,7 @@
   let font-size-author-label = font-size-base * 0.8
   let font-size-author-value = font-size-base * 0.9
 
-  show link: it => underline(text(fill: color-primary-strong, it))
+  show link: it => underline(text(fill: color-primary, it))
   show heading.where(level: 1): set text(size: font-size-h1, weight: 700, fill: color-text)
   show heading.where(level: 2): set text(size: font-size-h2, weight: 700, fill: color-text)
   show heading.where(level: 3): set text(size: font-size-h3, weight: 600, fill: color-text)

@@ -2,7 +2,7 @@
 
 ### v0.2.0
 
-- Styling follows the folium website: darker green links, bold level 2 headings, and rounded corners on callouts, code blocks and block quotes
+- Styling follows the folium website: bold level 2 headings, and rounded corners on callouts, code blocks and block quotes
 - Block quotes have a light green background and a green left border, with square left corners and rounded right corners
 - Code blocks have rounded corners, including syntax-highlighted ones
 - Callout headers keep the color of the callout type, and notes use the brand green; icons and titles are in the text color; the border is thinner and lighter
