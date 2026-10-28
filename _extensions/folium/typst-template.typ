@@ -12,7 +12,6 @@
 #let color-text = color-black-dark
 #let color-code = rgb("#E4E4E7")
 #let color-caption = rgb("#496985")
-#let color-callout-text = rgb("#1C2833")
 #let color-callout-border = rgb("#DEE2E6")
 #let color-primary = rgb("#95B540") // accent: borders, highlights, decoration
 #let color-primary-strong = rgb("#567318") // text and fills, 5.4:1 against white
@@ -118,7 +117,7 @@
 
 // Callout icons are Font Awesome Free 6.5.1 (CC BY 4.0,
 // https://fontawesome.com/license/free), the important icon is custom. Each is
-// drawn in the color of its callout.
+// drawn in the text color.
 #let callout-icon-height = 11pt
 #let callout-svg(color, view-box, path, fill-rule: "nonzero") = image(
   bytes("<svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"" + color.to-hex() + "\" viewBox=\"" + view-box + "\"><path fill-rule=\"" + fill-rule + "\" d=\"" + path + "\"/></svg>"),
@@ -133,9 +132,9 @@
 #let callout-important-icon(color) = callout-svg(color, "0 0 512 512", "M64 0h384a64 64 0 0 1 64 64v384a64 64 0 0 1-64 64H64a64 64 0 0 1-64-64V64A64 64 0 0 1 64 0zM256 112a32 32 0 0 1 32 32v128a32 32 0 0 1-64 0V144a32 32 0 0 1 32-32zM256 336a40 40 0 1 1 0 80a40 40 0 1 1 0-80z", fill-rule: "evenodd")
 
 // The callout type is recognised by the color Quarto passes as `icon_color`.
-// As in styles.scss, the note follows the brand and the other types keep their
-// colors; the icon and the title take the type color shifted 10% toward black,
-// and the note header is the brand color tinted 90% toward white.
+// As in styles.scss, the note header is the brand color tinted 90% toward white
+// and the other types keep the header colors Quarto passes; the icon and the
+// title are in the text color for every type.
 #let callout-types = (
   note: (quarto-color: rgb("#0758E5"), icon: callout-note-icon),
   tip: (quarto-color: rgb("#00A047"), icon: callout-tip-icon),
@@ -144,9 +143,7 @@
   important: (quarto-color: rgb("#CC1914"), icon: callout-important-icon),
 )
 
-#let callout-icon-scale = 10%
 #let callout-header-scale = 90%
-#let shade-color(c, amount) = color.mix((black, amount), (c, 100% - amount), space: rgb)
 #let tint-color(c, amount) = color.mix((white, amount), (c, 100% - amount), space: rgb)
 
 #let callout-type(icon-color) = {
@@ -191,12 +188,10 @@
 // title style is therefore applied by a show rule on the title block, marked
 // with an imperceptible corner radius that nothing else uses, instead of
 // wrapping the title in `text()`. Quarto copies the block's fields when it
-// rebuilds it, so the marker survives. For the same reason the title color
-// travels on the title block as the paint of an invisible zero-width stroke,
-// which the show rule reads back.
+// rebuilds it, so the marker survives.
 #let callout-title-marker = 0.01pt
 #show block.where(radius: callout-title-marker): it => {
-  set text(weight: 700, fill: it.stroke.paint)
+  set text(weight: 700)
   it
 }
 
@@ -210,16 +205,14 @@
 ) = {
   let kind = callout-type(icon_color)
   let is-note = kind == "note"
-  let accent = if is-note { color-primary } else { icon_color }
   let header-color = if is-note { tint-color(color-primary, callout-header-scale) } else { background_color }
-  // a callout of an unknown type, such as the generic one, has no type color
-  let tone = if kind == none { color-callout-text } else { shade-color(accent, callout-icon-scale) }
+  // a callout of an unknown type, such as the generic one, keeps Quarto's icon
   let rendered-icon = if icon == none {
     none
   } else if kind == none {
     icon
   } else {
-    (callout-types.at(kind).icon)(tone)
+    (callout-types.at(kind).icon)(color-text)
   }
   block(
     breakable: false,
@@ -235,12 +228,11 @@
       // Icon and title are adjacent, with no whitespace between them.
       block(
         fill: header-color,
-        stroke: 0pt + tone,
         width: 100%,
         inset: 5pt,
         radius: callout-title-marker,
       )[#if rendered-icon != none {
-          callout-icon-box(text(fill: tone, rendered-icon))
+          callout-icon-box(text(fill: color-text, rendered-icon))
         }#trim-title(title)],
     )
       + if (body != []) {
