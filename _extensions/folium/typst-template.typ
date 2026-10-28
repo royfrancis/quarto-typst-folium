@@ -55,7 +55,7 @@
 #let badge = badge-secondary
 
 // table
-#show table.cell.where(y: 0): set text(weight: 700)
+#show table.cell.where(y: 0): set text(weight: 600)
 #let table-frame(width, color) = (x, y) => (
   left: (width + 1pt) + white,
   right: (width + 1pt) + white,
@@ -190,7 +190,7 @@
 // rebuilds it, so the marker survives.
 #let callout-title-marker = 0.01pt
 #show block.where(radius: callout-title-marker): it => {
-  set text(weight: 700)
+  set text(weight: 600)
   it
 }
 
@@ -269,7 +269,7 @@
       // the body is indented to start under the title text, past the icon
       block(
         below: 0.5em,
-        text(weight: 700)[#if drawn != none { callout-icon-box(drawn) }#trim-title(title)],
+        text(weight: 600)[#if drawn != none { callout-icon-box(drawn) }#trim-title(title)],
       ) + pad(left: if drawn != none { callout-icon-height + callout-icon-gap } else { 0pt }, body)
     } else if drawn != none {
       context {
@@ -404,8 +404,8 @@
   let font-size-author-value = font-size-base * 0.9
 
   show link: it => underline(text(fill: color-primary, it))
-  show heading.where(level: 1): set text(size: font-size-h1, weight: 700, fill: color-text)
-  show heading.where(level: 2): set text(size: font-size-h2, weight: 700, fill: color-text)
+  show heading.where(level: 1): set text(size: font-size-h1, weight: 600, fill: color-text)
+  show heading.where(level: 2): set text(size: font-size-h2, weight: 600, fill: color-text)
   show heading.where(level: 3): set text(size: font-size-h3, weight: 600, fill: color-text)
   show heading.where(level: 4): set text(size: font-size-h4, weight: 600, fill: color-text)
   show heading.where(level: 5): set text(size: font-size-h5, weight: 600, fill: color-text)
