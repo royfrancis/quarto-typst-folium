@@ -447,11 +447,15 @@ Use important callouts for essential information the reader must understand befo
 
 Callout variations.
 
-Simple appearance
+Simple appearance has no header. The icon sits beside the text, and a title is shown only when one is given.
 
 ```
 ::: {.callout-note appearance="simple"}
 This is a callout with a simple appearance.
+:::
+
+::: {.callout-note appearance="simple" title="Simple with a title"}
+This is a callout with a simple appearance and a title.
 :::
 ```
 
@@ -459,7 +463,11 @@ This is a callout with a simple appearance.
 This is a callout with a simple appearance.
 :::
 
-Minimal appearance
+::: {.callout-note appearance="simple" title="Simple with a title"}
+This is a callout with a simple appearance and a title.
+:::
+
+Minimal appearance has no icon, only the text.
 
 ```
 ::: {.callout-note appearance="minimal"}
@@ -473,7 +481,7 @@ This is a callout with a minimal appearance.
 
 Cross-referenceable callout
 
-A callout with an id that starts with its type (`nte-`, `tip-`, `wrn-`, `cau-` or `imp-`) is numbered and can be referenced.
+A callout with an id that starts with its type (`nte-`, `tip-`, `wrn-`, `cau-` or `imp-`) is numbered and can be referenced. It always uses the default layout, because its number is part of the title.
 
 ```
 ::: {#nte-example .callout-note title="Referenceable callout"}

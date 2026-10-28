@@ -1,5 +1,20 @@
 ## Changelog
 
+### v0.2.0
+
+- Styling follows the folium website: darker green links, bold level 2 headings, and rounded corners on callouts, code blocks and block quotes
+- Block quotes have a light green background and a green left border, with square left corners and rounded right corners
+- Code blocks have rounded corners, including syntax-highlighted ones
+- Callout icons and titles take the color of the callout type, and notes use the brand green; the border is thinner and lighter
+- New icon for important callouts, replacing the skull
+- Callout icons are vertically centered on the title text; they sat above its center before
+- The gap between a callout icon and its title is smaller and the same in every callout; default titles had an extra space before
+- `appearance="simple"` callouts show the icon beside the text with no header or default title, and `appearance="minimal"` callouts show only the text; a title is shown only when one is given
+- The `callout-appearance` document option is honored
+- Added `folium-callout.lua`, which passes the callout appearance on to Typst
+- Cross-referenced callouts and callouts in the margin keep the default layout, whatever their appearance
+- A callout without a type (`.callout`) is a simple callout and no longer shows the title "None"
+
 ### v0.1.0
 
 - Separated presentation settings under `folium` from report data under `nbis`

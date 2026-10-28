@@ -9,6 +9,7 @@ This is a Quarto extension that provides a Typst template for NBIS PDF reports. 
 - Cover page with contributors grouped by role
 - Customizable logo and background images
 - Structured layout for NBIS reports
+- Callouts (default, simple and minimal appearance), block quotes and code blocks styled to match the folium website
 - Support for Font Awesome icons
   - See Font Awesome icons [here](https://fontawesome.com/search?ip=classic&ic=free-collection)
 
