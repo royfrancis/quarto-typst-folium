@@ -524,13 +524,13 @@ Hidden content
 ### Conditional content
 
 ````
-::: {{.content-visible when-format="html"}}
+::: {.content-visible when-format="html"}
 Will only appear in HTML.
 :::
 ````
 
 ````
-::: {{.content-hidden when-format="html"}}
+::: {.content-hidden when-format="html"}
 Will not appear in HTML.
 :::
 ````

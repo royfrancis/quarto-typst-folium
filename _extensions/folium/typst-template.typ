@@ -9,8 +9,8 @@
 #let color-black-light = rgb("#A1A1A1")
 #let color-black-lighter = rgb("#F5F5F5")
 
-#let color-text = color-black-dark
-#let color-code = rgb("#E4E4E7")
+#let color-text = rgb("#1C2833")
+#let color-code = color-black-lighter
 #let color-caption = rgb("#496985")
 #let color-callout-border = rgb("#DEE2E6")
 #let color-primary = rgb("#95B540") // accent: borders, highlights, decoration
@@ -30,16 +30,16 @@
   fill: color-primary,
   inset: (x: 4pt, y: 4pt),
   baseline: 4pt,
-  radius: 3pt,
+  radius: corner-radius,
   stroke: none,
-  text(size: 0.8em, weight: 600, fill: color-text, content),
+  text(size: 0.8em, weight: 600, fill: color-black-lighter, content),
 )
 
 #let badge-secondary(content) = box(
   fill: color-secondary,
   inset: (x: 4pt, y: 4pt),
   baseline: 4pt,
-  radius: 3pt,
+  radius: corner-radius,
   stroke: none,
   text(size: 0.8em, weight: 600, fill: color-text, content),
 )
@@ -48,11 +48,11 @@
   fill: color-tertiary,
   inset: (x: 4pt, y: 4pt),
   baseline: 4pt,
-  radius: 3pt,
+  radius: corner-radius,
   stroke: none,
   text(size: 0.8em, weight: 600, fill: color-text, content),
 )
-#let badge = badge-secondary
+#let badge = badge-primary
 
 // table
 #show table.cell.where(y: 0): set text(weight: 600)
@@ -76,17 +76,18 @@
   fill: color-tertiary-light,
   radius: (left: 0pt, right: corner-radius),
   stroke: (left: 0.25em + color-primary),
-  text(size: 0.92em, it.body),
+  text(fill: color-caption, it.body),
 )
 
 // Code blocks. Quarto's raw block rule sets a 2pt radius, which this overrides.
 // Pandoc's highlighting definitions (`Skylighting`) pass the same 2pt radius to
 // the block explicitly, and a `set` rule does not override an explicit
 // argument, so that block is rebuilt with the corner radius.
-#show raw.where(block: true): set block(radius: corner-radius)
+#show raw.where(block: true): set block(fill: color-code, radius: corner-radius)
 #show block.where(radius: 2pt): it => {
   let fields = it.fields()
   let body = fields.remove("body")
+  fields.fill = color-code
   fields.radius = corner-radius
   // `below` is a synthesized field, see `block_with_new_content` in definitions.typ
   let below = fields.at("below", default: auto)
@@ -110,7 +111,7 @@
 // padding is real horizontal space (`h`) outside plus an equal `extent`.
 #let inline-code(content) = {
   h(3pt)
-  highlight(fill: color-code, radius: 3pt, extent: 3pt, content)
+  highlight(fill: color-code, radius: 3pt, extent: 3pt, text(fill: color-caption, content))
   h(3pt)
 }
 
@@ -131,15 +132,14 @@
 #let callout-important-icon(color) = callout-svg(color, "0 0 512 512", "M64 0h384a64 64 0 0 1 64 64v384a64 64 0 0 1-64 64H64a64 64 0 0 1-64-64V64A64 64 0 0 1 64 0zM256 112a32 32 0 0 1 32 32v128a32 32 0 0 1-64 0V144a32 32 0 0 1 32-32zM256 336a40 40 0 1 1 0 80a40 40 0 1 1 0-80z", fill-rule: "evenodd")
 
 // The callout type is recognised by the color Quarto passes as `icon_color`.
-// As in styles.scss, the note header is the brand color tinted 90% toward white
-// and the other types keep the header colors Quarto passes; the icon and the
-// title are in the text color for every type.
+// As in styles.scss, each header uses its theme color tinted 90% toward white;
+// the icon and the title are in the text color for every type.
 #let callout-types = (
-  note: (quarto-color: rgb("#0758E5"), icon: callout-note-icon),
-  tip: (quarto-color: rgb("#00A047"), icon: callout-tip-icon),
-  caution: (quarto-color: rgb("#FC5300"), icon: callout-caution-icon),
-  warning: (quarto-color: rgb("#EB9113"), icon: callout-warning-icon),
-  important: (quarto-color: rgb("#CC1914"), icon: callout-important-icon),
+  note: (quarto-color: rgb("#0758E5"), color: color-primary, icon: callout-note-icon),
+  tip: (quarto-color: rgb("#00A047"), color: rgb("#6B9F7F"), icon: callout-tip-icon),
+  caution: (quarto-color: rgb("#FC5300"), color: rgb("#CF6A45"), icon: callout-caution-icon),
+  warning: (quarto-color: rgb("#EB9113"), color: rgb("#D4A02F"), icon: callout-warning-icon),
+  important: (quarto-color: rgb("#CC1914"), color: rgb("#B5495B"), icon: callout-important-icon),
 )
 
 #let callout-header-scale = 90%
@@ -203,8 +203,7 @@
   body_background_color: white,
 ) = {
   let kind = callout-type(icon_color)
-  let is-note = kind == "note"
-  let header-color = if is-note { tint-color(color-primary, callout-header-scale) } else { background_color }
+  let header-color = if kind == none { background_color } else { tint-color(callout-types.at(kind).color, callout-header-scale) }
   // a callout of an unknown type, such as the generic one, keeps Quarto's icon
   let rendered-icon = if icon == none {
     none
